@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.*;
 
 @SuppressWarnings("serial")
 public class VentanaLogin extends JFrame implements ActionListener {
@@ -29,7 +30,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		gbc.fill = GridBagConstraints.BOTH;
 
 		JLabel txtTitulo = new JLabel("Login");
-		txtTitulo.setFont(new Font("calibri", Font.BOLD, 18));
+		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
 		txtTitulo.setForeground(new Color(7, 16, 58));
 
 		JLabel txtUsuario = new JLabel("usuario");
@@ -78,8 +79,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancelar) {
+		if (e.getSource() == btnIniciar) {
+			dispose();
 			
+			new VentanaPrincipal();
 		}
 		
 	}
