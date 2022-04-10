@@ -16,7 +16,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	JTable tablaEmpleados;
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;
 	JButton btnEnviar, btnVaciar;
-	
+
 	JLabel txtTitulo;
 
 	public VentanaEmpleados() {
@@ -91,7 +91,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		checkApellido.addActionListener(this);
 		checkCargo.addActionListener(this);
 		checkSalario.addActionListener(this);
-		
+
 		cajaIdEmpleado.addKeyListener(this);
 		cajaNombre.addKeyListener(this);
 		cajaApellido.addKeyListener(this);
@@ -197,30 +197,29 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 		if (e.getSource() == cajaNombre || e.getSource() == cajaCargo || e.getSource() == cajaApellido) {
-			if(!Character.isLetter(e.getKeyChar()))
+			if (!Character.isLetter(e.getKeyChar()))
 				e.consume();
-		} else if(e.getSource() == cajaIdEmpleado) {
-			if(!Character.isDigit(e.getKeyChar()))
+		} else if (e.getSource() == cajaIdEmpleado) {
+			if (!Character.isDigit(e.getKeyChar()))
 				e.consume();
-		} else if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) 
-		        && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
-		        && (e.getKeyChar() != '.' || cajaSalario.getText().contains(".")) ) {
-		            e.consume();
+		} else if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
+				&& (e.getKeyChar() != '.' || cajaSalario.getText().contains("."))) {
+			e.consume();
 		}
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
