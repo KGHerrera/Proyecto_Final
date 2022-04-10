@@ -30,7 +30,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		setVisible(true);
 		setClosable(true);
 
-		JLabel txtIdLibro = new JLabel("id empleado: ");
+		JLabel txtIdLibro = new JLabel("id libro: ");
 		JLabel txtNombre = new JLabel("nombre: ");
 		JLabel txtAutor = new JLabel("autor: ");
 		JLabel txtPrecio = new JLabel("precio: ");
@@ -56,7 +56,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		btnVaciar = new JButton("vaciar");
 		
 		txtIcono = new JLabel();
-		iconLibros = new ImageIcon("src/iconos/altasLibros.png");
+		iconLibros = new ImageIcon("src/iconos/altasLibro.png");
 		
 		txtIcono.setIcon(iconLibros);
 

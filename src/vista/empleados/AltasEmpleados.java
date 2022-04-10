@@ -4,7 +4,7 @@ package vista.empleados;
 public class AltasEmpleados extends VentanaEmpleados {
 
 	public AltasEmpleados() {
-		txtTitulo.setText("Altas Empleados");
+		txtTitulo.setText("Agregar Empleados");
 		cajaNombre.setEnabled(true);
 		cajaApellido.setEnabled(true);
 		cajaSalario.setEnabled(true);

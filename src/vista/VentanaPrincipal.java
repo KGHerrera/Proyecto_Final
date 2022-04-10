@@ -3,6 +3,7 @@ package vista;
 import javax.swing.*;
 
 import vista.empleados.*;
+import vista.libros.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -127,6 +128,18 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		internalFrameConsultasEmpleados = new ConsultasEmpleados();
 		desktopPane.add(internalFrameConsultasEmpleados);
 		
+		internalFrameAltasLibros = new AltasLibros();
+		desktopPane.add(internalFrameAltasLibros);
+		
+		internalFrameBajasLibros = new BajasLibros();
+		desktopPane.add(internalFrameBajasLibros);
+		
+		internalFrameCambiosLibros = new CambiosLibros();
+		desktopPane.add(internalFrameCambiosLibros);
+		
+		internalFrameConsultasLibros = new ConsultasLibros();
+		desktopPane.add(internalFrameConsultasLibros);
+		
 		esconderVentanas();
 		
 		add(desktopPane, BorderLayout.CENTER);
@@ -140,6 +153,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		internalFrameBajasEmpleados.setVisible(false);
 		internalFrameCambiosEmpleados.setVisible(false);
 		internalFrameConsultasEmpleados.setVisible(false);
+		
+		internalFrameAltasLibros.setVisible(false);
+		internalFrameBajasLibros.setVisible(false);
+		internalFrameCambiosLibros.setVisible(false);
+		internalFrameConsultasLibros.setVisible(false);
 	}
 
 	@Override
@@ -167,19 +185,23 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		
 		else if (e.getSource() == itemAltasLibros) {
-
+			esconderVentanas();
+			internalFrameAltasLibros.setVisible(true);
 		}
 
 		else if (e.getSource() == itemBajasLibros) {
-
+			esconderVentanas();
+			internalFrameBajasLibros.setVisible(true);
 		}
 		
 		else if (e.getSource() == itemCambiosLibros) {
-
+			esconderVentanas();
+			internalFrameCambiosLibros.setVisible(true);
 		}
 		
 		else if (e.getSource() == itemConsultasLibros) {
-
+			esconderVentanas();
+			internalFrameConsultasLibros.setVisible(true);
 		}
 		
 
