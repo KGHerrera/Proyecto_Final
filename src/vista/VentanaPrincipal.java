@@ -2,7 +2,7 @@ package vista;
 
 import javax.swing.*;
 
-import vista.empleados.VentanaEmpleados;
+import vista.empleados.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,7 +92,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 		
 		desktopPane = new JDesktopPane();
-		internalFrameAltasEmpleados = new VentanaEmpleados();
+		internalFrameAltasEmpleados = new AltasEmpleados();
 		
 		
 		desktopPane.add(internalFrameAltasEmpleados);

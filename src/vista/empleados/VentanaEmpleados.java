@@ -13,12 +13,11 @@ import javax.swing.border.Border;
 public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
 
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
-
 	JTable tablaEmpleados;
-
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;
-
 	JButton btnEnviar, btnVaciar;
+	
+	JLabel txtTitulo;
 
 	public VentanaEmpleados() {
 
@@ -37,7 +36,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		JLabel txtSalario = new JLabel("salario: ");
 		JLabel txtCargo = new JLabel("cargo: ");
 
-		JLabel txtTitulo = new JLabel("Empleados");
+		txtTitulo = new JLabel("Empleados");
 
 		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
 
@@ -56,7 +55,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnEnviar = new JButton("enviar");
 		btnVaciar = new JButton("vaciar");
 
-		txtTitulo.setBounds(this.getWidth() / 4, 40, 100, 20);
+		txtTitulo.setBounds(this.getWidth() / 4, 40, 300, 20);
 
 		txtIdEmpleado.setBounds(this.getWidth() / 4, 80, 100, 20);
 		txtNombre.setBounds(this.getWidth() / 4, 120, 100, 20);
@@ -205,7 +204,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		} else if(e.getSource() == cajaIdEmpleado) {
 			if(!Character.isDigit(e.getKeyChar()))
 				e.consume();
-		} if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) 
+		} else if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) 
 		        && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
 		        && (e.getKeyChar() != '.' || cajaSalario.getText().contains(".")) ) {
 		            e.consume();

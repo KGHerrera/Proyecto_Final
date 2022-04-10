@@ -14,6 +14,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	JButton btnIniciar, btnCancelar;
 	JTextField cajaUsuario;
 	JPasswordField cajaContrasenia;
+	JLabel txtTitulo;
 
 	public VentanaLogin() {
 
@@ -24,11 +25,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		this.setUndecorated(true);
 		setTitle("Iniciar sesion");
 		setSize(960, 620);
-		
+
 		setVisible(true);
 		gbc.fill = GridBagConstraints.BOTH;
 
-		JLabel txtTitulo = new JLabel("Login");
+		txtTitulo = new JLabel("Login");
 		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
 		txtTitulo.setForeground(new Color(7, 16, 58));
 
@@ -57,7 +58,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		alinearComponente(btnCancelar, 1, 3, 1, 1);
 
 		alinearComponente(txtIcono, 0, 1, 1, 2);
-		
+
 		btnIniciar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		pack();
@@ -80,9 +81,9 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnIniciar) {
 			dispose();
-			
+
 			new VentanaPrincipal();
 		}
-		
+
 	}
 }
