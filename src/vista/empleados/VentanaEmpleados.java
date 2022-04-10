@@ -2,10 +2,13 @@ package vista.empleados;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class VentanaEmpleados extends JInternalFrame {
+public class VentanaEmpleados extends JInternalFrame implements ActionListener {
 
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
 
@@ -80,11 +83,25 @@ public class VentanaEmpleados extends JInternalFrame {
 		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
 		tablaEmpleados.setBorder(line);
 
+		btnVaciar.addActionListener(this);
+
+		checkIdEmpleado.addActionListener(this);
+		checkNombre.addActionListener(this);
+		checkApellido.addActionListener(this);
+		checkCargo.addActionListener(this);
+		checkSalario.addActionListener(this);
+
 		add(txtIdEmpleado);
 		add(txtNombre);
 		add(txtApellido);
 		add(txtSalario);
 		add(txtCargo);
+
+		cajaIdEmpleado.setEnabled(false);
+		cajaNombre.setEnabled(false);
+		cajaApellido.setEnabled(false);
+		cajaSalario.setEnabled(false);
+		cajaCargo.setEnabled(false);
 
 		add(cajaIdEmpleado);
 		add(cajaNombre);
@@ -104,6 +121,70 @@ public class VentanaEmpleados extends JInternalFrame {
 		add(txtTitulo);
 
 		add(tablaEmpleados);
+
+	}
+
+	public void restablecerComponentes(JComponent... componentes) {
+		for (JComponent c : componentes) {
+
+			if (c instanceof JTextField)
+				((JTextField) c).setText("");
+
+			else if (c instanceof JCheckBox)
+				((JCheckBox) c).setSelected(false);
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnVaciar) {
+			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
+		}
+
+		else if (e.getSource() == checkIdEmpleado) {
+			if (checkIdEmpleado.isSelected())
+				cajaIdEmpleado.setEnabled(true);
+			else {
+				cajaIdEmpleado.setEnabled(false);
+				cajaIdEmpleado.setText("");
+			}
+		}
+
+		else if (e.getSource() == checkNombre) {
+			if (checkNombre.isSelected())
+				cajaNombre.setEnabled(true);
+			else {
+				cajaNombre.setEnabled(false);
+				cajaNombre.setText("");
+			}
+		}
+
+		else if (e.getSource() == checkApellido) {
+			if (checkApellido.isSelected())
+				cajaApellido.setEnabled(true);
+			else {
+				cajaApellido.setEnabled(false);
+				cajaApellido.setText("");
+			}
+		}
+
+		else if (e.getSource() == checkSalario) {
+			if (checkSalario.isSelected())
+				cajaSalario.setEnabled(true);
+			else {
+				cajaSalario.setEnabled(false);
+				cajaSalario.setText("");
+			}
+		}
+
+		else if (e.getSource() == checkCargo) {
+			if (checkCargo.isSelected())
+				cajaCargo.setEnabled(true);
+			else {
+				cajaCargo.setEnabled(false);
+				cajaCargo.setText("");
+			}
+		}
 
 	}
 }
