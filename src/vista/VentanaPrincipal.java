@@ -1,6 +1,9 @@
 package vista;
 
 import javax.swing.*;
+
+import vista.empleados.VentanaEmpleados;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +19,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	JMenuItem itemAltasEmpleados, itemBajasEmpleados, itemCambiosEmpleados, itemConsultasEmpleados, itemAltasLibros,
 			itemBajasLibros, itemCambiosLibros, itemConsultasLibros, itemAltasVentas, itemBajasVentas,
 			itemCambiosVentas, itemConsultasVentas;
+	
+	JDesktopPane desktopPane;
 
 	public VentanaPrincipal() {
 
@@ -24,7 +29,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Ventana Princpal");
 		setSize(1366, 768);
-		setLocationRelativeTo(null);
+		
 		setVisible(true);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -85,6 +90,16 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuBar.add(menuVentas);
 
 		setJMenuBar(menuBar);
+		
+		desktopPane = new JDesktopPane();
+		internalFrameAltasEmpleados = new VentanaEmpleados();
+		
+		
+		desktopPane.add(internalFrameAltasEmpleados);
+		
+		add(desktopPane, BorderLayout.CENTER);
+		
+		setLocationRelativeTo(null);
 
 	}
 
@@ -92,7 +107,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == itemAltasEmpleados) {
-
+			internalFrameAltasEmpleados.setVisible(true);
 		}
 
 		else if (e.getSource() == itemBajasEmpleados) {
