@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class VentanaEmpleados extends JInternalFrame implements ActionListener {
+public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
 
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
 
@@ -90,6 +92,12 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener {
 		checkApellido.addActionListener(this);
 		checkCargo.addActionListener(this);
 		checkSalario.addActionListener(this);
+		
+		cajaIdEmpleado.addKeyListener(this);
+		cajaNombre.addKeyListener(this);
+		cajaApellido.addKeyListener(this);
+		cajaCargo.addKeyListener(this);
+		cajaSalario.addKeyListener(this);
 
 		add(txtIdEmpleado);
 		add(txtNombre);
@@ -186,5 +194,34 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener {
 			}
 		}
 
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		if (e.getSource() == cajaNombre || e.getSource() == cajaCargo || e.getSource() == cajaApellido) {
+			if(!Character.isLetter(e.getKeyChar()))
+				e.consume();
+		} else if(e.getSource() == cajaIdEmpleado) {
+			if(!Character.isDigit(e.getKeyChar()))
+				e.consume();
+		} if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) 
+		        && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
+		        && (e.getKeyChar() != '.' || cajaSalario.getText().contains(".")) ) {
+		            e.consume();
+		}
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
