@@ -37,12 +37,19 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		JMenu menuEmpleados = new JMenu("Empleado");
 		JMenu menuLibros = new JMenu("Libro");
 		JMenu menuVentas = new JMenu("Venta");
+		Dimension d1 = new Dimension(90, 25);
+		Dimension d2 = new Dimension(87, 25);
+		
+		menuEmpleados.setPreferredSize(d1);
+		menuLibros.setPreferredSize(d1);
+		menuVentas.setPreferredSize(d1);
 
 		itemAltasEmpleados = new JMenuItem("Agregar");
 		itemBajasEmpleados = new JMenuItem("Eliminar");
 		itemCambiosEmpleados = new JMenuItem("Modificar");
 		itemConsultasEmpleados = new JMenuItem("Buscar");
-
+		
+		
 		itemAltasEmpleados.addActionListener(this);
 		itemBajasEmpleados.addActionListener(this);
 		itemCambiosEmpleados.addActionListener(this);
@@ -81,6 +88,23 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		itemBajasLibros.addActionListener(this);
 		itemCambiosLibros.addActionListener(this);
 		itemConsultasLibros.addActionListener(this);
+		
+		
+		itemAltasEmpleados.setPreferredSize(d2);
+		itemBajasEmpleados.setPreferredSize(d2);
+		itemCambiosEmpleados.setPreferredSize(d2);
+		itemConsultasEmpleados.setPreferredSize(d2);
+		
+		itemAltasLibros.setPreferredSize(d2);
+		itemBajasLibros.setPreferredSize(d2);
+		itemCambiosLibros.setPreferredSize(d2);
+		itemConsultasLibros.setPreferredSize(d2);
+		
+		itemAltasVentas.setPreferredSize(d2);
+		itemBajasVentas.setPreferredSize(d2);
+		itemCambiosVentas.setPreferredSize(d2);
+		itemConsultasVentas.setPreferredSize(d2);
+		
 
 		menuVentas.add(itemAltasVentas);
 		menuVentas.add(itemBajasVentas);
@@ -88,7 +112,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuVentas.add(itemConsultasVentas);
 
 		menuBar.add(menuVentas);
-
 		setJMenuBar(menuBar);
 		
 		desktopPane = new JDesktopPane();

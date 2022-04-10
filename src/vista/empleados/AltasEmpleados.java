@@ -17,7 +17,7 @@ public class AltasEmpleados extends VentanaEmpleados {
 		checkCargo.setVisible(false);
 
 		tablaEmpleados.setVisible(false);
-		setSize(1366 / 2 - 50, 400);
+		setSize(1366 - 600, 400);
 
 	}
 }
