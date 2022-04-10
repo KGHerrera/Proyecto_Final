@@ -93,25 +93,36 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		desktopPane = new JDesktopPane();
 		internalFrameAltasEmpleados = new AltasEmpleados();
+		internalFrameBajasEmpleados = new BajasEmpleados();
 		
 		
 		desktopPane.add(internalFrameAltasEmpleados);
+		desktopPane.add(internalFrameBajasEmpleados);
+		
+		esconderVentanas();
 		
 		add(desktopPane, BorderLayout.CENTER);
 		
 		setLocationRelativeTo(null);
 
 	}
+	
+	public void esconderVentanas() {
+		internalFrameAltasEmpleados.setVisible(false);
+		internalFrameBajasEmpleados.setVisible(false);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == itemAltasEmpleados) {
+			esconderVentanas();
 			internalFrameAltasEmpleados.setVisible(true);
 		}
 
 		else if (e.getSource() == itemBajasEmpleados) {
-
+			esconderVentanas();
+			internalFrameBajasEmpleados.setVisible(true);
 		}
 		
 		else if (e.getSource() == itemCambiosEmpleados) {
