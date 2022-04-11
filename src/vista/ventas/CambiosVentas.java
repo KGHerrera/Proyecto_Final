@@ -7,7 +7,7 @@ public class CambiosVentas extends VentanaVentas {
 	public CambiosVentas() {
 		txtTitulo.setText("Modificar venta");
 		btnEnviar.setText("modificar");
-		iconVentas = new ImageIcon("src/iconos/cambiosLibro.png");
+		iconVentas = new ImageIcon("src/iconos/cambiosVenta.png");
 		txtIcono.setIcon(iconVentas);
 	}
 }

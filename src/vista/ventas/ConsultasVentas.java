@@ -7,7 +7,7 @@ public class ConsultasVentas extends VentanaVentas{
 	public ConsultasVentas() {
 		txtTitulo.setText("Buscar venta");
 		btnEnviar.setText("buscar");
-		iconVentas = new ImageIcon("src/iconos/consultasLibro.png");
+		iconVentas = new ImageIcon("src/iconos/consultasVenta.png");
 		txtIcono.setIcon(iconVentas);
 	}
 }

@@ -57,7 +57,7 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 		btnVaciar = new JButton("vaciar");
 		
 		txtIcono = new JLabel();
-		iconVentas = new ImageIcon("src/iconos/altasLibro.png");
+		iconVentas = new ImageIcon("src/iconos/altasVenta.png");
 		
 		txtIcono.setIcon(iconVentas);
 

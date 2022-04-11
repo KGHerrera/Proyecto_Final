@@ -9,7 +9,7 @@ public class BajasVentas extends VentanaVentas{
 	public BajasVentas() {
 		txtTitulo.setText("Eliminar venta");
 		btnEnviar.setText("eliminar");
-		iconVentas = new ImageIcon("src/iconos/bajasLibro.png");
+		iconVentas = new ImageIcon("src/iconos/bajasVenta.png");
 		txtIcono.setIcon(iconVentas);
 	}
 }
