@@ -31,11 +31,11 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 		setVisible(true);
 		setClosable(true);
 
-		JLabel txtIdLibro = new JLabel("id venta: ");
-		JLabel txtNombre = new JLabel("cantidad de libros: ");
-		JLabel txtAutor = new JLabel("total a pagar: ");
-		JLabel txtPrecio = new JLabel("id libro: ");
-		JLabel txtStock = new JLabel("id empleado: ");
+		JLabel txtIdVenta = new JLabel("id venta: ");
+		JLabel txtCantidadLibros = new JLabel("cantidad: ");
+		JLabel txtTotalPagar = new JLabel("total a pagar: ");
+		JLabel txtIdLibro = new JLabel("id libro: ");
+		JLabel txtIdEmpleado = new JLabel("id empleado: ");
 
 		txtTitulo = new JLabel("Ventas");
 
@@ -63,11 +63,11 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 
 		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
 
-		txtIdLibro.setBounds(this.getWidth() / 3, 80, 100, 20);
-		txtNombre.setBounds(this.getWidth() / 3, 120, 100, 20);
-		txtAutor.setBounds(this.getWidth() / 3, 160, 100, 20);
-		txtPrecio.setBounds(this.getWidth() / 3, 200, 100, 20);
-		txtStock.setBounds(this.getWidth() / 3, 240, 100, 20);
+		txtIdVenta.setBounds(this.getWidth() / 3, 80, 100, 20);
+		txtCantidadLibros.setBounds(this.getWidth() / 3, 120, 100, 20);
+		txtTotalPagar.setBounds(this.getWidth() / 3, 160, 100, 20);
+		txtIdLibro.setBounds(this.getWidth() / 3, 200, 100, 20);
+		txtIdEmpleado.setBounds(this.getWidth() / 3, 240, 100, 20);
 		
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
@@ -106,11 +106,11 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 		cajaIdEmpleado.addKeyListener(this);
 		cajaIdLibro.addKeyListener(this);
 
+		add(txtIdVenta);
+		add(txtCantidadLibros);
+		add(txtTotalPagar);
 		add(txtIdLibro);
-		add(txtNombre);
-		add(txtAutor);
-		add(txtPrecio);
-		add(txtStock);
+		add(txtIdEmpleado);
 
 		cajaIdVentas.setEnabled(false);
 		cajaCantidadLibros.setEnabled(false);
@@ -210,7 +210,7 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
-		if (e.getSource() == cajaIdVentas || e.getSource() == cajaIdEmpleado || e.getSource() == cajaCantidadLibros) {
+		if (e.getSource() == cajaIdVentas || e.getSource() == cajaIdEmpleado || e.getSource() == cajaCantidadLibros || e.getSource() == cajaIdLibro) {
 			if (!Character.isDigit(e.getKeyChar()))
 				e.consume();
 		} 

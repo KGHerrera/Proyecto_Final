@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import vista.empleados.*;
 import vista.libros.*;
+import vista.ventas.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -111,6 +112,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuVentas.add(itemBajasVentas);
 		menuVentas.add(itemCambiosVentas);
 		menuVentas.add(itemConsultasVentas);
+		
+		itemAltasVentas.addActionListener(this);
+		itemBajasVentas.addActionListener(this);
+		itemCambiosVentas.addActionListener(this);
+		itemConsultasVentas.addActionListener(this);
 
 		menuBar.add(menuVentas);
 		setJMenuBar(menuBar);
@@ -140,24 +146,42 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		internalFrameConsultasLibros = new ConsultasLibros();
 		desktopPane.add(internalFrameConsultasLibros);
 		
+		
+		internalFrameAltasVentas = new AltasVentas();
+		desktopPane.add(internalFrameAltasVentas);
+
+		internalFrameBajasVentas = new BajasVentas();
+		desktopPane.add(internalFrameBajasVentas);
+
+		internalFrameCambiosVentas = new CambiosVentas();
+		desktopPane.add(internalFrameCambiosVentas);
+
+		internalFrameConsultasVentas = new ConsultasVentas();
+		desktopPane.add(internalFrameConsultasVentas);
+
 		esconderVentanas();
-		
+
 		add(desktopPane, BorderLayout.CENTER);
-		
+
 		setLocationRelativeTo(null);
 
 	}
-	
+
 	public void esconderVentanas() {
 		internalFrameAltasEmpleados.setVisible(false);
 		internalFrameBajasEmpleados.setVisible(false);
 		internalFrameCambiosEmpleados.setVisible(false);
 		internalFrameConsultasEmpleados.setVisible(false);
-		
+
 		internalFrameAltasLibros.setVisible(false);
 		internalFrameBajasLibros.setVisible(false);
 		internalFrameCambiosLibros.setVisible(false);
 		internalFrameConsultasLibros.setVisible(false);
+
+		internalFrameAltasVentas.setVisible(false);
+		internalFrameBajasVentas.setVisible(false);
+		internalFrameCambiosVentas.setVisible(false);
+		internalFrameConsultasVentas.setVisible(false);
 	}
 
 	@Override
@@ -206,19 +230,23 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 
 		else if (e.getSource() == itemAltasVentas) {
-
+			esconderVentanas();
+			internalFrameAltasVentas.setVisible(true);
 		}
 
 		else if (e.getSource() == itemBajasVentas) {
-
+			esconderVentanas();
+			internalFrameBajasVentas.setVisible(true);
 		}
 		
 		else if (e.getSource() == itemCambiosVentas) {
-
+			esconderVentanas();
+			internalFrameCambiosVentas.setVisible(true);
 		}
 		
 		else if (e.getSource() == itemConsultasVentas) {
-
+			esconderVentanas();
+			internalFrameConsultasVentas.setVisible(true);
 		}
 
 	}
