@@ -1,11 +1,11 @@
 package modelo;
 
-public class Administrador {
+public class Usuario {
 	private String usuario;
 	private String nombre;
 	private String contrasenia;
 
-	public Administrador(String usuario, String nombre, String contrasenia) {
+	public Usuario(String usuario, String nombre, String contrasenia) {
 		super();
 		this.usuario = usuario;
 		this.nombre = nombre;

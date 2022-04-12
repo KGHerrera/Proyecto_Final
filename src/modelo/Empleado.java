@@ -4,10 +4,10 @@ public class Empleado {
 	private int idEmpleado;
 	private String nombre;
 	private String apellido;
-	private String salario;
+	private double salario;
 	private String cargo;
 
-	public Empleado(int idEmpleado, String nombre, String apellido, String salario, String cargo) {
+	public Empleado(int idEmpleado, String nombre, String apellido, double salario, String cargo) {
 		super();
 		this.idEmpleado = idEmpleado;
 		this.nombre = nombre;
@@ -40,11 +40,11 @@ public class Empleado {
 		this.apellido = apellido;
 	}
 
-	public String getSalario() {
+	public double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(String salario) {
+	public void setSalario(double salario) {
 		this.salario = salario;
 	}
 
