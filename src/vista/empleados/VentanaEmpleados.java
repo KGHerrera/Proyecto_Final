@@ -6,20 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.SQLException;
-
-import vista.ResultSetTableModel;
 
 import javax.swing.border.Border;
-
 import modelo.Empleado;
 
 @SuppressWarnings("serial")
 public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
-	
+
 	Empleado empleado = new Empleado();
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
-	public static JTable tablaEmpleados;
+
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;
 	JButton btnEnviar, btnVaciar;
 
@@ -36,6 +32,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		setResizable(true);
 		setVisible(true);
 		setClosable(true);
+		
 
 		JLabel txtIdEmpleado = new JLabel("id empleado: ");
 		JLabel txtNombre = new JLabel("nombre: ");
@@ -92,11 +89,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnEnviar.setBounds(this.getWidth() / 2 + 70, 280, 100, 20);
 		btnVaciar.setBounds(this.getWidth() / 3, 280, 100, 20);
 
-		tablaEmpleados = new JTable();
-		tablaEmpleados.setBounds(this.getWidth() / 12, 320, 630, 270);
-
-		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
-		tablaEmpleados.setBorder(line);
+		
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);
@@ -143,22 +136,29 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		add(txtTitulo);
 
-		add(tablaEmpleados);
-
 		setSize(1366 - 600, 680);
 		setLocation(getWidth() / 2 - getWidth() / 7, 0);
-
-		actualizarTabla();
+		
+		
+		
 
 	}
 	
+	public void alinearTabla(JTable t) {
+		t.setBounds(this.getWidth() / 12, 320, 630, 270);
+
+		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
+		t.setBorder(line);
+		add(t);
+	}
+
 	public void limpiarObjeto(Empleado e) {
 		e.setIdEmpleado(0);
 		e.setNombre(null);
 		e.setApellido(null);
 		e.setCargo(null);
 		e.setSalario(0.0);
-		
+
 	}
 
 	public void restablecerComponentes(JComponent... componentes) {
@@ -171,9 +171,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 				((JCheckBox) c).setSelected(false);
 		}
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	
+	public void validacion(ActionEvent e) {
 		if (e.getSource() == btnVaciar) {
 			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 		}
@@ -226,6 +225,11 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	}
 
 	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+
+	@Override
 	public void keyTyped(KeyEvent e) {
 
 		if (e.getSource() == cajaNombre || e.getSource() == cajaCargo || e.getSource() == cajaApellido) {
@@ -253,21 +257,4 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 	}
 
-	public void actualizarTabla() {
-		String consulta;
-		consulta = "SELECT * FROM empleados";
-
-		ResultSetTableModel modeloDatos = null;
-
-		try {
-			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
-					consulta);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		tablaEmpleados.setModel(modeloDatos);
-	}
 }

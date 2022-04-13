@@ -9,6 +9,7 @@ public class EmpleadoDAO extends Thread {
 
 	private int opcion;
 	private Empleado empleado;
+	@SuppressWarnings("unused")
 	private static ResultSet rs;
 
 	public boolean altaEmpleado(Empleado e) {

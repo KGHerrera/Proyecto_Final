@@ -28,6 +28,7 @@ public class ResultSetTableModel extends AbstractTableModel {
 	}
 
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Class getColumnClass(int columna) throws IllegalStateException {
 
 		if (!conectadoALaBaseDeDatos)

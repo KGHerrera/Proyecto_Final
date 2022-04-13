@@ -1,7 +1,15 @@
 package vista.empleados;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JTable;
+
+import conexion.ConexionBD;
+import controlador.EmpleadoDAO;
+
 @SuppressWarnings("serial")
 public class AltasEmpleados extends VentanaEmpleados {
+	public static JTable tablaAltas;
 
 	public AltasEmpleados() {
 		txtTitulo.setText("Agregar Empleados");
@@ -15,9 +23,45 @@ public class AltasEmpleados extends VentanaEmpleados {
 		checkApellido.setVisible(false);
 		checkSalario.setVisible(false);
 		checkCargo.setVisible(false);
+		
+		tablaAltas = new JTable();
+		alinearTabla(tablaAltas);
+		
 
-		tablaEmpleados.setVisible(false);
-		setSize(1366 - 600, 400);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnVaciar) {
+			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
+		}
 
+		if(e.getSource() == btnEnviar) {
+			if (!cajaNombre.getText().equals("")
+					&& !cajaApellido.getText().equals("") && !cajaCargo.getText().equals("")
+					&& !cajaSalario.getText().equals("")) {
+				limpiarObjeto(empleado);
+				
+				empleado.setNombre(cajaNombre.getText());
+				empleado.setApellido(cajaApellido.getText());
+				empleado.setSalario(Double.parseDouble(cajaSalario.getText()));
+				empleado.setCargo(cajaCargo.getText());
+				
+				ConexionBD.getConexion();
+				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+				empleadoDAO.setEmpleado(empleado);
+				empleadoDAO.setOpcion(1);
+				empleadoDAO.start();
+				
+				try {
+					empleadoDAO.join();
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		}
 	}
 }

@@ -16,7 +16,5 @@ public AltasVentas() {
 		checkIdLibro.setVisible(false);
 		checkIdEmpleado.setVisible(false);
 
-		tablaVentas.setVisible(false);
-		setSize(1366 - 600, 400);
 	}
 }

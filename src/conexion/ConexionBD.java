@@ -1,7 +1,5 @@
 package conexion;
 
-import javax.swing.JTable;
-
 import modelo.Usuario;
 import modelo.Empleado;
 
@@ -10,15 +8,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JTable;
+
 import vista.ResultSetTableModel;
-import vista.empleados.VentanaEmpleados;
+import vista.empleados.AltasEmpleados;
+import vista.empleados.BajasEmpleados;
+import vista.empleados.CambiosEmpleados;
+import vista.empleados.ConsultasEmpleados;
 
 public class ConexionBD extends Thread {
-	public static JTable tabla = new JTable();
+	
 	private static Connection conexion = null;
 	private static PreparedStatement pstm;
 	private static ResultSet rs;
 	private static String consultaA;
+	public static JTable tabla = new JTable(); 
 
 	private ConexionBD() {
 		try {
@@ -84,6 +89,9 @@ public class ConexionBD extends Thread {
 			pstm.setDouble(3, e.getSalario());
 			pstm.setString(4, e.getCargo());
 			pstm.executeUpdate();
+			
+			actualizarTabla();
+			
 			return true;
 
 		} catch (SQLException error) {
@@ -110,7 +118,7 @@ public class ConexionBD extends Thread {
 				pos++;
 			}
 
-			if (!e.getApellido().equals("null")) {
+			if (e.getApellido() != null) {
 				pstm.setString(pos, e.getApellido());
 				pos++;
 			}
@@ -187,11 +195,9 @@ public class ConexionBD extends Thread {
 				pstm.setString(pos, e.getCargo());
 				pos++;
 			}
-			
+
 			consulta = "select * from empleados where ";
 			consulta += generarConsultaEmpleadoModel(e);
-			
-			
 
 			consultaA = consulta;
 
@@ -208,8 +214,7 @@ public class ConexionBD extends Thread {
 	public static void obtenerConsulta() {
 
 		ResultSetTableModel modeloDatos = null;
-		System.out.println(consultaA);
-		
+
 		try {
 			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
 					consultaA);
@@ -219,7 +224,7 @@ public class ConexionBD extends Thread {
 			e.printStackTrace();
 		}
 
-		VentanaEmpleados.tablaEmpleados.setModel(modeloDatos);
+		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
 
 	}
 
@@ -279,6 +284,28 @@ public class ConexionBD extends Thread {
 			consulta = consulta.substring(0, consulta.length() - 4);
 
 		return consulta;
+	}
+	
+	public static void actualizarTabla() {
+		String consulta;
+		consulta = "SELECT * FROM empleados";
+
+		ResultSetTableModel modeloDatos = null;
+
+		try {
+			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
+					consulta);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		AltasEmpleados.tablaAltas.setModel(modeloDatos);
+		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
+		
+		CambiosEmpleados.tablaCambios.setModel(modeloDatos);
+		BajasEmpleados.tablaBajas.setModel(modeloDatos);
 	}
 
 }

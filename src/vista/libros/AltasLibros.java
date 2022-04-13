@@ -15,8 +15,5 @@ public class AltasLibros extends VentanaLibros{
 		checkAutor.setVisible(false);
 		checkPrecio.setVisible(false);
 		checkStock.setVisible(false);
-
-		tablaLibros.setVisible(false);
-		setSize(1366 - 600, 400);
 	}
 }

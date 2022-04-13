@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 
 import conexion.ConexionBD;
 import controlador.EmpleadoDAO;
@@ -11,64 +12,23 @@ import controlador.EmpleadoDAO;
 
 @SuppressWarnings("serial")
 public class ConsultasEmpleados extends VentanaEmpleados implements ActionListener {
-
+	public static JTable tablaConsultas;
+	
 	public ConsultasEmpleados() {
 		txtTitulo.setText("Buscar empleado");
 		btnEnviar.setText("buscar");
 		iconEmpleado = new ImageIcon("src/iconos/consultas.png");
 		txtIcono.setIcon(iconEmpleado);
+		tablaConsultas = new JTable();
+		alinearTabla(tablaConsultas);
+		
+		ConexionBD.actualizarTabla();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnVaciar) {
-			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
-		}
-
-		else if (e.getSource() == checkIdEmpleado) {
-			if (checkIdEmpleado.isSelected())
-				cajaIdEmpleado.setEnabled(true);
-			else {
-				cajaIdEmpleado.setEnabled(false);
-				cajaIdEmpleado.setText("");
-			}
-		}
-
-		else if (e.getSource() == checkNombre) {
-			if (checkNombre.isSelected())
-				cajaNombre.setEnabled(true);
-			else {
-				cajaNombre.setEnabled(false);
-				cajaNombre.setText("");
-			}
-		}
-
-		else if (e.getSource() == checkApellido) {
-			if (checkApellido.isSelected())
-				cajaApellido.setEnabled(true);
-			else {
-				cajaApellido.setEnabled(false);
-				cajaApellido.setText("");
-			}
-		}
-
-		else if (e.getSource() == checkSalario) {
-			if (checkSalario.isSelected())
-				cajaSalario.setEnabled(true);
-			else {
-				cajaSalario.setEnabled(false);
-				cajaSalario.setText("");
-			}
-		}
-
-		else if (e.getSource() == checkCargo) {
-			if (checkCargo.isSelected())
-				cajaCargo.setEnabled(true);
-			else {
-				cajaCargo.setEnabled(false);
-				cajaCargo.setText("");
-			}
-		}
+		
+		validacion(e);
 
 		if (e.getSource() == btnEnviar) {
 
