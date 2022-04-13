@@ -18,12 +18,12 @@ import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
 
 public class ConexionBD extends Thread {
-	
+
 	private static Connection conexion = null;
 	private static PreparedStatement pstm;
 	private static ResultSet rs;
 	private static String consultaA;
-	public static JTable tabla = new JTable(); 
+	public static JTable tabla = new JTable();
 
 	private ConexionBD() {
 		try {
@@ -89,9 +89,9 @@ public class ConexionBD extends Thread {
 			pstm.setDouble(3, e.getSalario());
 			pstm.setString(4, e.getCargo());
 			pstm.executeUpdate();
-			
+
 			actualizarTabla();
-			
+
 			return true;
 
 		} catch (SQLException error) {
@@ -134,7 +134,7 @@ public class ConexionBD extends Thread {
 			}
 
 			pstm.executeUpdate();
-			
+
 			actualizarTabla();
 
 			return true;
@@ -147,7 +147,7 @@ public class ConexionBD extends Thread {
 
 	public static boolean cambioEmpleado(Empleado e) {
 		try {
-			String consulta = "update empleados set nombre=?, apellido=?, =?, salario=?, cargo=? WHERE id_cliente=?";
+			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
 			pstm = conexion.prepareStatement(consulta);
 			pstm.setString(1, e.getNombre());
 			pstm.setString(2, e.getApellido());
@@ -156,7 +156,8 @@ public class ConexionBD extends Thread {
 			pstm.setInt(5, e.getIdEmpleado());
 
 			pstm.executeUpdate();
-
+			
+			actualizarTabla();
 			return true;
 
 		} catch (Exception ex) {
@@ -198,13 +199,6 @@ public class ConexionBD extends Thread {
 				pos++;
 			}
 
-			consulta = "select * from empleados where ";
-			consulta += generarConsultaEmpleadoModel(e);
-
-			consultaA = consulta;
-
-			obtenerConsulta();
-
 			rs = pstm.executeQuery();
 
 		} catch (Exception ex) {
@@ -213,9 +207,13 @@ public class ConexionBD extends Thread {
 		return rs;
 	}
 
-	public static void obtenerConsulta() {
+	public static void obtenerConsulta(Empleado empleado) {
 
 		ResultSetTableModel modeloDatos = null;
+		String consulta = "select * from empleados where ";
+		consulta += generarConsultaEmpleadoModel(empleado);
+
+		consultaA = consulta;
 
 		try {
 			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
@@ -287,7 +285,7 @@ public class ConexionBD extends Thread {
 
 		return consulta;
 	}
-	
+
 	public static void actualizarTabla() {
 		String consulta;
 		consulta = "SELECT * FROM empleados";
@@ -305,7 +303,7 @@ public class ConexionBD extends Thread {
 
 		AltasEmpleados.tablaAltas.setModel(modeloDatos);
 		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
-		
+
 		CambiosEmpleados.tablaCambios.setModel(modeloDatos);
 		BajasEmpleados.tablaBajas.setModel(modeloDatos);
 	}

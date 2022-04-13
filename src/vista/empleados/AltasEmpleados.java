@@ -26,8 +26,6 @@ public class AltasEmpleados extends VentanaEmpleados {
 		
 		tablaAltas = new JTable();
 		alinearTabla(tablaAltas);
-		
-
 	}
 	
 	@Override

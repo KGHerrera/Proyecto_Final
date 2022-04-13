@@ -28,6 +28,10 @@ public class EmpleadoDAO extends Thread {
 		rs = ConexionBD.consultaEmpleado(e);
 	}
 
+	public void obtenerConsulta(Empleado e) {
+		ConexionBD.obtenerConsulta(e);
+	}
+
 	public void consultar() {
 		if (opcion == 1) {
 			altaEmpleado(empleado);
@@ -36,6 +40,8 @@ public class EmpleadoDAO extends Thread {
 		} else if (opcion == 3) {
 			cambioEmpleado(empleado);
 		} else if (opcion == 4) {
+			obtenerConsulta(empleado);
+		} else if (opcion == 5) {
 			consultaEmpleado(empleado);
 		}
 	}
