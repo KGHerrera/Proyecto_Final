@@ -9,6 +9,7 @@ public class EmpleadoDAO extends Thread {
 
 	private int opcion;
 	private Empleado empleado;
+	private static ResultSet rs;
 
 	public boolean altaEmpleado(Empleado e) {
 		return ConexionBD.altaEmpleado(e);
@@ -22,8 +23,8 @@ public class EmpleadoDAO extends Thread {
 		return ConexionBD.cambioEmpleado(e);
 	}
 
-	public ResultSet consultaEmpleado(Empleado e) {
-		return ConexionBD.consultaEmpleado(e);
+	public void consultaEmpleado(Empleado e) {
+		rs = ConexionBD.consultaEmpleado(e);
 	}
 
 	public void consultar() {

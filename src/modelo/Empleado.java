@@ -7,6 +7,10 @@ public class Empleado {
 	private double salario;
 	private String cargo;
 
+	public Empleado() {
+		
+	}
+	
 	public Empleado(int idEmpleado, String nombre, String apellido, double salario, String cargo) {
 		super();
 		this.idEmpleado = idEmpleado;

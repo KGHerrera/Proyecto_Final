@@ -12,11 +12,14 @@ import vista.ResultSetTableModel;
 
 import javax.swing.border.Border;
 
+import modelo.Empleado;
+
 @SuppressWarnings("serial")
 public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
-
+	
+	Empleado empleado = new Empleado();
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
-	JTable tablaEmpleados;
+	public static JTable tablaEmpleados;
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;
 	JButton btnEnviar, btnVaciar;
 
@@ -96,6 +99,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		tablaEmpleados.setBorder(line);
 
 		btnVaciar.addActionListener(this);
+		btnEnviar.addActionListener(this);
 
 		checkIdEmpleado.addActionListener(this);
 		checkNombre.addActionListener(this);
@@ -146,6 +150,15 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		actualizarTabla();
 
+	}
+	
+	public void limpiarObjeto(Empleado e) {
+		e.setIdEmpleado(0);
+		e.setNombre(null);
+		e.setApellido(null);
+		e.setCargo(null);
+		e.setSalario(0.0);
+		
 	}
 
 	public void restablecerComponentes(JComponent... componentes) {

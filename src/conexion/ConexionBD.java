@@ -11,12 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import vista.ResultSetTableModel;
+import vista.empleados.VentanaEmpleados;
 
 public class ConexionBD extends Thread {
-	public static JTable tabla;
+	public static JTable tabla = new JTable();
 	private static Connection conexion = null;
 	private static PreparedStatement pstm;
 	private static ResultSet rs;
+	private static String consultaA;
 
 	private ConexionBD() {
 		try {
@@ -157,7 +159,7 @@ public class ConexionBD extends Thread {
 		try {
 			String consulta = "select * from empleados where ";
 			int pos = 1;
-			consulta = generarConsultaEmpleado(e);
+			consulta += generarConsultaEmpleado(e);
 
 			pstm = conexion.prepareStatement(consulta);
 
@@ -171,7 +173,7 @@ public class ConexionBD extends Thread {
 				pos++;
 			}
 
-			if (!e.getApellido().equals("null")) {
+			if (e.getApellido() != null) {
 				pstm.setString(pos, e.getApellido());
 				pos++;
 			}
@@ -185,6 +187,15 @@ public class ConexionBD extends Thread {
 				pstm.setString(pos, e.getCargo());
 				pos++;
 			}
+			
+			consulta = "select * from empleados where ";
+			consulta += generarConsultaEmpleadoModel(e);
+			
+			
+
+			consultaA = consulta;
+
+			obtenerConsulta();
 
 			rs = pstm.executeQuery();
 
@@ -194,19 +205,21 @@ public class ConexionBD extends Thread {
 		return rs;
 	}
 
-	public void obtenerConsulta() {
+	public static void obtenerConsulta() {
 
 		ResultSetTableModel modeloDatos = null;
-
+		System.out.println(consultaA);
+		
 		try {
-			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria", "a");
+			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
+					consultaA);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		tabla.setModel(modeloDatos);
+		VentanaEmpleados.tablaEmpleados.setModel(modeloDatos);
 
 	}
 
@@ -221,7 +234,7 @@ public class ConexionBD extends Thread {
 			consulta += "nombre=? and ";
 		}
 
-		if (!e.getApellido().equals("null")) {
+		if (e.getApellido() != null) {
 			consulta += "apellido=? and ";
 		}
 
@@ -231,6 +244,35 @@ public class ConexionBD extends Thread {
 
 		if (e.getCargo() != null) {
 			consulta += "cargo=? and ";
+		}
+
+		if ((consulta.substring(consulta.length() - 4, consulta.length()).equals("and ")))
+			consulta = consulta.substring(0, consulta.length() - 4);
+
+		return consulta;
+	}
+
+	public static String generarConsultaEmpleadoModel(Empleado e) {
+
+		String consulta = "";
+		if (e.getIdEmpleado() != 0) {
+			consulta += "id_empleado='" + e.getIdEmpleado() + "' and ";
+		}
+
+		if (e.getNombre() != null) {
+			consulta += "nombre='" + e.getNombre() + "' and ";
+		}
+
+		if (e.getApellido() != null) {
+			consulta += "apellido='" + e.getApellido() + "' and ";
+		}
+
+		if (e.getSalario() != 0.0) {
+			consulta += "salario='" + e.getSalario() + "' and ";
+		}
+
+		if (e.getCargo() != null) {
+			consulta += "cargo='" + e.getCargo() + "' and ";
 		}
 
 		if ((consulta.substring(consulta.length() - 4, consulta.length()).equals("and ")))
