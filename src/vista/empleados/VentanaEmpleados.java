@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
+
+import vista.ResultSetTableModel;
 
 import javax.swing.border.Border;
 
@@ -26,7 +29,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Empleados");
 		setSize(1366 - 500, 650);
-		
+
 		setResizable(true);
 		setVisible(true);
 		setClosable(true);
@@ -55,10 +58,10 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		btnEnviar = new JButton("enviar");
 		btnVaciar = new JButton("vaciar");
-		
+
 		txtIcono = new JLabel();
 		iconEmpleado = new ImageIcon("src/iconos/altas.png");
-		
+
 		txtIcono.setIcon(iconEmpleado);
 
 		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
@@ -68,7 +71,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		txtApellido.setBounds(this.getWidth() / 3, 160, 100, 20);
 		txtSalario.setBounds(this.getWidth() / 3, 200, 100, 20);
 		txtCargo.setBounds(this.getWidth() / 3, 240, 100, 20);
-		
+
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
 		cajaIdEmpleado.setBounds(this.getWidth() / 2 + 70, 80, 100, 20);
@@ -137,9 +140,11 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		add(txtTitulo);
 
 		add(tablaEmpleados);
-		
+
 		setSize(1366 - 600, 680);
-		setLocation(getWidth()/2 - getWidth()/7, 0);
+		setLocation(getWidth() / 2 - getWidth() / 7, 0);
+
+		actualizarTabla();
 
 	}
 
@@ -233,5 +238,23 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void actualizarTabla() {
+		String consulta;
+		consulta = "SELECT * FROM empleados";
+
+		ResultSetTableModel modeloDatos = null;
+
+		try {
+			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
+					consulta);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		tablaEmpleados.setModel(modeloDatos);
 	}
 }
