@@ -104,7 +104,7 @@ public class ConexionBD extends Thread {
 		try {
 			String consulta = "delete from empleados where ";
 			int pos = 1;
-			consulta = generarConsultaEmpleado(e);
+			consulta += generarConsultaEmpleado(e);
 
 			pstm = conexion.prepareStatement(consulta);
 
@@ -134,6 +134,8 @@ public class ConexionBD extends Thread {
 			}
 
 			pstm.executeUpdate();
+			
+			actualizarTabla();
 
 			return true;
 
