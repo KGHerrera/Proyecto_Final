@@ -14,6 +14,7 @@ import modelo.Empleado;
 public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
 
 	Empleado empleado = new Empleado();
+	
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
 
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;

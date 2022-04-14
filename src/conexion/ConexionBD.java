@@ -156,7 +156,7 @@ public class ConexionBD extends Thread {
 			pstm.setInt(5, e.getIdEmpleado());
 
 			pstm.executeUpdate();
-			
+
 			actualizarTabla();
 			return true;
 

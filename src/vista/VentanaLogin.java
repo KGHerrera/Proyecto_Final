@@ -1,9 +1,14 @@
 package vista;
 
 import javax.swing.*;
+
+import conexion.ConexionBD;
+import modelo.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 @SuppressWarnings("serial")
 public class VentanaLogin extends JFrame implements ActionListener {
@@ -15,6 +20,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	JTextField cajaUsuario;
 	JPasswordField cajaContrasenia;
 	JLabel txtTitulo;
+
+	Usuario usuario = new Usuario();
 
 	public VentanaLogin() {
 
@@ -63,6 +70,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		btnCancelar.addActionListener(this);
 		pack();
 		setLocationRelativeTo(null);
+		ConexionBD.getConexion();
 
 	}
 
@@ -79,10 +87,29 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnIniciar) {
-			dispose();
 
-			new VentanaPrincipal();
+		char[] arrayC = cajaContrasenia.getPassword();
+		String pass = new String(arrayC);
+
+		if (e.getSource() == btnIniciar && !cajaUsuario.getText().equals("") && !pass.equals("")) {
+
+			usuario.setUsuario(cajaUsuario.getText());
+			usuario.setContrasenia(pass);
+
+			try {
+				if (ConexionBD.consultarUsuario(usuario).next()) {
+					new VentanaPrincipal();
+					dispose();
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+
+		else if (e.getSource() == btnCancelar) {
+			dispose();
 		}
 
 	}
