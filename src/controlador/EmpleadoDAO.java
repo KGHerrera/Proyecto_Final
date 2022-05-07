@@ -9,6 +9,7 @@ public class EmpleadoDAO extends Thread {
 
 	private int opcion;
 	private Empleado empleado;
+	
 	@SuppressWarnings("unused")
 	private static ResultSet rs;
 
@@ -24,9 +25,7 @@ public class EmpleadoDAO extends Thread {
 		return ConexionBD.cambioEmpleado(e);
 	}
 
-	public void consultaEmpleado(Empleado e) {
-		rs = ConexionBD.consultaEmpleado(e);
-	}
+	
 
 	public void obtenerConsulta(Empleado e) {
 		ConexionBD.obtenerConsulta(e);
@@ -41,9 +40,7 @@ public class EmpleadoDAO extends Thread {
 			cambioEmpleado(empleado);
 		} else if (opcion == 4) {
 			obtenerConsulta(empleado);
-		} else if (opcion == 5) {
-			consultaEmpleado(empleado);
-		}
+		} 
 	}
 
 	public Empleado getEmpleado() {

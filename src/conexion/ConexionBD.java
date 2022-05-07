@@ -9,21 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.JTable;
-
 import vista.ResultSetTableModel;
 import vista.empleados.AltasEmpleados;
 import vista.empleados.BajasEmpleados;
 import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
 
-public class ConexionBD extends Thread {
+public class ConexionBD {
 
 	private static Connection conexion = null;
 	private static PreparedStatement pstm;
 	private static ResultSet rs;
 	private static String consultaA;
-	public static JTable tabla = new JTable();
 
 	private ConexionBD() {
 		try {
@@ -43,7 +40,6 @@ public class ConexionBD extends Thread {
 	}
 
 	public static Connection getConexion() {
-
 		if (conexion == null) {
 			new ConexionBD();
 		}
@@ -166,47 +162,6 @@ public class ConexionBD extends Thread {
 		return false;
 	}
 
-	public static ResultSet consultaEmpleado(Empleado e) {
-		try {
-			String consulta = "select * from empleados where ";
-			int pos = 1;
-			consulta += generarConsultaEmpleado(e);
-
-			pstm = conexion.prepareStatement(consulta);
-
-			if (e.getIdEmpleado() != 0) {
-				pstm.setInt(pos, e.getIdEmpleado());
-				pos++;
-			}
-
-			if (e.getNombre() != null) {
-				pstm.setString(pos, e.getNombre());
-				pos++;
-			}
-
-			if (e.getApellido() != null) {
-				pstm.setString(pos, e.getApellido());
-				pos++;
-			}
-
-			if (e.getSalario() != 0.0) {
-				pstm.setDouble(pos, e.getSalario());
-				pos++;
-			}
-
-			if (e.getCargo() != null) {
-				pstm.setString(pos, e.getCargo());
-				pos++;
-			}
-
-			rs = pstm.executeQuery();
-
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		return rs;
-	}
-
 	public static void obtenerConsulta(Empleado empleado) {
 
 		ResultSetTableModel modeloDatos = null;
@@ -303,7 +258,6 @@ public class ConexionBD extends Thread {
 
 		AltasEmpleados.tablaAltas.setModel(modeloDatos);
 		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
-
 		CambiosEmpleados.tablaCambios.setModel(modeloDatos);
 		BajasEmpleados.tablaBajas.setModel(modeloDatos);
 	}

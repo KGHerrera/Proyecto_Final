@@ -59,7 +59,7 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 					empleado.setCargo(cajaCargo.getText());
 				}
 				
-				ConexionBD.getConexion();
+			
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 				empleadoDAO.setEmpleado(empleado);
 				empleadoDAO.setOpcion(4);

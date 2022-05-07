@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
-import conexion.ConexionBD;
+
 import controlador.EmpleadoDAO;
 
 @SuppressWarnings("serial")
@@ -52,7 +52,7 @@ public class BajasEmpleados extends VentanaEmpleados {
 				empleado.setCargo(cajaCargo.getText());
 			}
 
-			ConexionBD.getConexion();
+			
 			EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 			empleadoDAO.setEmpleado(empleado);
 			empleadoDAO.setOpcion(2);

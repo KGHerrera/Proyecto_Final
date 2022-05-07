@@ -70,6 +70,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		btnCancelar.addActionListener(this);
 		pack();
 		setLocationRelativeTo(null);
+		
 		ConexionBD.getConexion();
 
 	}
@@ -100,6 +101,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 				if (ConexionBD.consultarUsuario(usuario).next()) {
 					new VentanaPrincipal();
 					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "datos erroneos");
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
