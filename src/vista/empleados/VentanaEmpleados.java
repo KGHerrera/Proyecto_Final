@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.border.Border;
 
+import conexion.ConexionBD;
+import controlador.EmpleadoDAO;
 import modelo.Empleado;
 
 @SuppressWarnings("serial")
@@ -89,8 +91,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		checkApellido.setBounds(this.getWidth() / 4 + 40, 160, 20, 20);
 		checkSalario.setBounds(this.getWidth() / 4 + 40, 200, 20, 20);
 		checkCargo.setBounds(this.getWidth() / 4 + 40, 240, 20, 20);
-		
-		
+
 		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 20);
 		btnEnviar.setBounds(this.getWidth() / 2 + 140, 160, 100, 20);
 		btnVaciar.setBounds(this.getWidth() / 2 + 140, 200, 100, 20);
@@ -98,6 +99,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnBuscar.addActionListener(this);
 
 		checkIdEmpleado.addActionListener(this);
 		checkNombre.addActionListener(this);
@@ -146,6 +149,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		setSize(1366 - 600, 680);
 		setLocation(getWidth() / 2 - getWidth() / 7, 0);
 
+		ConexionBD.getConexion();
+
 	}
 
 	public void alinearTabla(JTable t) {
@@ -165,7 +170,6 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		e.setApellido(null);
 		e.setCargo(null);
 		e.setSalario(0.0);
-
 	}
 
 	public void restablecerComponentes(JComponent... componentes) {
@@ -180,7 +184,41 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	}
 
 	public void validacion(ActionEvent e) {
-		if (e.getSource() == btnVaciar) {
+
+		if (e.getSource() == btnBuscar) {
+
+			if (!cajaIdEmpleado.getText().equals("")) {
+
+				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+				
+				limpiarObjeto(empleado);
+				empleado.setIdEmpleado(Integer.parseInt(cajaIdEmpleado.getText()));
+				empleadoDAO.setEmpleado(empleado);
+
+				empleado = empleadoDAO.buscarEmpleadoID(empleado);
+
+				if (empleado.getNombre() != null) {
+					cajaNombre.setText(empleado.getNombre());
+					cajaApellido.setText(empleado.getApellido());
+					cajaSalario.setText(String.valueOf(empleado.getSalario()));
+					cajaCargo.setText(empleado.getCargo());
+					
+					checkNombre.setSelected(true);
+					checkApellido.setSelected(true);
+					checkSalario.setSelected(true);
+					checkCargo.setSelected(true);
+					
+					cajaNombre.setEnabled(true);
+					cajaApellido.setEnabled(true);
+					cajaSalario.setEnabled(true);
+					cajaCargo.setEnabled(true);
+				}
+
+			}
+
+		}
+
+		else if (e.getSource() == btnVaciar) {
 			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 		}
 
@@ -227,6 +265,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 				cajaCargo.setEnabled(false);
 				cajaCargo.setText("");
 			}
+		} else if (e.getSource() == btnCancelar) {
+			setVisible(false);
 		}
 
 	}

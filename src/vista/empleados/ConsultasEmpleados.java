@@ -16,7 +16,7 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 	
 	public ConsultasEmpleados() {
 		txtTitulo.setText("Buscar empleado");
-		btnEnviar.setText("buscar");
+		btnEnviar.setText("consultar");
 		iconEmpleado = new ImageIcon("src/iconos/consultas.png");
 		txtIcono.setIcon(iconEmpleado);
 		tablaConsultas = new JTable();

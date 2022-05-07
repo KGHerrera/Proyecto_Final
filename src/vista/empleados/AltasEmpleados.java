@@ -23,16 +23,17 @@ public class AltasEmpleados extends VentanaEmpleados {
 		checkSalario.setVisible(false);
 		checkCargo.setVisible(false);
 		
+		btnBuscar.setVisible(false);
+		
 		tablaAltas = new JTable();
 		alinearTabla(tablaAltas);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnVaciar) {
-			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
-		}
-
+		
+		validacion(e);
+		
 		if(e.getSource() == btnEnviar) {
 			if (!cajaNombre.getText().equals("")
 					&& !cajaApellido.getText().equals("") && !cajaCargo.getText().equals("")
@@ -58,5 +59,6 @@ public class AltasEmpleados extends VentanaEmpleados {
 				
 			}
 		}
+			
 	}
 }

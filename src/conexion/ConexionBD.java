@@ -56,7 +56,6 @@ public class ConexionBD {
 		}
 	}
 
-	// verificacion de usuario
 
 	public static ResultSet consultarUsuario(Usuario u) {
 		try {
@@ -142,6 +141,7 @@ public class ConexionBD {
 	}
 
 	public static boolean cambioEmpleado(Empleado e) {
+		
 		try {
 			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
 			pstm = conexion.prepareStatement(consulta);
@@ -150,7 +150,6 @@ public class ConexionBD {
 			pstm.setDouble(3, e.getSalario());
 			pstm.setString(4, e.getCargo());
 			pstm.setInt(5, e.getIdEmpleado());
-
 			pstm.executeUpdate();
 
 			actualizarTabla();
@@ -181,6 +180,20 @@ public class ConexionBD {
 
 		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
 
+	}
+	
+	public static ResultSet consultaEmpleado(Empleado e) {
+		
+		try {
+			String consulta = "select * from empleados where id_empleado=?";
+			pstm = conexion.prepareStatement(consulta);
+			pstm.setInt(1, e.getIdEmpleado());
+			rs = pstm.executeQuery();
+
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		return rs;
 	}
 
 	public static String generarConsultaEmpleado(Empleado e) {
