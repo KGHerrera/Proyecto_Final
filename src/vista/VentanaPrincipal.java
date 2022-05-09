@@ -2,7 +2,7 @@ package vista;
 
 import javax.swing.*;
 
-import conexion.ConexionBD;
+import controlador.EmpleadoDAO;
 import vista.empleados.*;
 import vista.libros.*;
 import vista.ventas.*;
@@ -22,8 +22,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	JMenuItem itemAltasEmpleados, itemBajasEmpleados, itemCambiosEmpleados, itemConsultasEmpleados, itemAltasLibros,
 			itemBajasLibros, itemCambiosLibros, itemConsultasLibros, itemAltasVentas, itemBajasVentas,
 			itemCambiosVentas, itemConsultasVentas;
-	
+
 	JDesktopPane desktopPane;
+	
+	public static EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 
 	public VentanaPrincipal() {
 
@@ -32,7 +34,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Ventana Princpal");
 		setSize(1366, 768);
-		
+
 		setVisible(true);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -42,7 +44,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		JMenu menuVentas = new JMenu("Venta");
 		Dimension d1 = new Dimension(90, 25);
 		Dimension d2 = new Dimension(87, 25);
-		
+
 		menuEmpleados.setPreferredSize(d1);
 		menuLibros.setPreferredSize(d1);
 		menuVentas.setPreferredSize(d1);
@@ -51,8 +53,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		itemBajasEmpleados = new JMenuItem("Eliminar");
 		itemCambiosEmpleados = new JMenuItem("Modificar");
 		itemConsultasEmpleados = new JMenuItem("Buscar");
-		
-		
+
 		itemAltasEmpleados.addActionListener(this);
 		itemBajasEmpleados.addActionListener(this);
 		itemCambiosEmpleados.addActionListener(this);
@@ -91,29 +92,27 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		itemBajasLibros.addActionListener(this);
 		itemCambiosLibros.addActionListener(this);
 		itemConsultasLibros.addActionListener(this);
-		
-		
+
 		itemAltasEmpleados.setPreferredSize(d2);
 		itemBajasEmpleados.setPreferredSize(d2);
 		itemCambiosEmpleados.setPreferredSize(d2);
 		itemConsultasEmpleados.setPreferredSize(d2);
-		
+
 		itemAltasLibros.setPreferredSize(d2);
 		itemBajasLibros.setPreferredSize(d2);
 		itemCambiosLibros.setPreferredSize(d2);
 		itemConsultasLibros.setPreferredSize(d2);
-		
+
 		itemAltasVentas.setPreferredSize(d2);
 		itemBajasVentas.setPreferredSize(d2);
 		itemCambiosVentas.setPreferredSize(d2);
 		itemConsultasVentas.setPreferredSize(d2);
-		
 
 		menuVentas.add(itemAltasVentas);
 		menuVentas.add(itemBajasVentas);
 		menuVentas.add(itemCambiosVentas);
 		menuVentas.add(itemConsultasVentas);
-		
+
 		itemAltasVentas.addActionListener(this);
 		itemBajasVentas.addActionListener(this);
 		itemCambiosVentas.addActionListener(this);
@@ -121,33 +120,32 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		menuBar.add(menuVentas);
 		setJMenuBar(menuBar);
-		
+
 		desktopPane = new JDesktopPane();
 		internalFrameAltasEmpleados = new AltasEmpleados();
 		desktopPane.add(internalFrameAltasEmpleados);
-		
+
 		internalFrameBajasEmpleados = new BajasEmpleados();
 		desktopPane.add(internalFrameBajasEmpleados);
-		
+
 		internalFrameCambiosEmpleados = new CambiosEmpleados();
 		desktopPane.add(internalFrameCambiosEmpleados);
-		
+
 		internalFrameConsultasEmpleados = new ConsultasEmpleados();
 		desktopPane.add(internalFrameConsultasEmpleados);
-		
+
 		internalFrameAltasLibros = new AltasLibros();
 		desktopPane.add(internalFrameAltasLibros);
-		
+
 		internalFrameBajasLibros = new BajasLibros();
 		desktopPane.add(internalFrameBajasLibros);
-		
+
 		internalFrameCambiosLibros = new CambiosLibros();
 		desktopPane.add(internalFrameCambiosLibros);
-		
+
 		internalFrameConsultasLibros = new ConsultasLibros();
 		desktopPane.add(internalFrameConsultasLibros);
-		
-		
+
 		internalFrameAltasVentas = new AltasVentas();
 		desktopPane.add(internalFrameAltasVentas);
 
@@ -165,14 +163,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		add(desktopPane, BorderLayout.CENTER);
 
 		setLocationRelativeTo(null);
-		
-		ConexionBD.getConexion();
-		
-		ConexionBD.actualizarTabla();
+
+		VentanaPrincipal.empleadoDAO.getCon().actualizarTabla();
 
 	}
-	
-	
 
 	public void esconderVentanas() {
 		internalFrameAltasEmpleados.setVisible(false);
@@ -203,18 +197,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			esconderVentanas();
 			internalFrameBajasEmpleados.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemCambiosEmpleados) {
 			esconderVentanas();
 			internalFrameCambiosEmpleados.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemConsultasEmpleados) {
 			esconderVentanas();
 			internalFrameConsultasEmpleados.setVisible(true);
 		}
-		
-		
+
 		else if (e.getSource() == itemAltasLibros) {
 			esconderVentanas();
 			internalFrameAltasLibros.setVisible(true);
@@ -224,17 +217,16 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			esconderVentanas();
 			internalFrameBajasLibros.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemCambiosLibros) {
 			esconderVentanas();
 			internalFrameCambiosLibros.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemConsultasLibros) {
 			esconderVentanas();
 			internalFrameConsultasLibros.setVisible(true);
 		}
-		
 
 		else if (e.getSource() == itemAltasVentas) {
 			esconderVentanas();
@@ -245,12 +237,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			esconderVentanas();
 			internalFrameBajasVentas.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemCambiosVentas) {
 			esconderVentanas();
 			internalFrameCambiosVentas.setVisible(true);
 		}
-		
+
 		else if (e.getSource() == itemConsultasVentas) {
 			esconderVentanas();
 			internalFrameConsultasVentas.setVisible(true);

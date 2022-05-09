@@ -1,11 +1,9 @@
 package vista.empleados;
 
 import java.awt.event.ActionEvent;
-
-
 import javax.swing.JTable;
 
-import controlador.EmpleadoDAO;
+import vista.VentanaPrincipal;
 
 @SuppressWarnings("serial")
 public class AltasEmpleados extends VentanaEmpleados {
@@ -31,8 +29,6 @@ public class AltasEmpleados extends VentanaEmpleados {
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "s");
 
-		
-
 	}
 
 	@Override
@@ -50,13 +46,14 @@ public class AltasEmpleados extends VentanaEmpleados {
 				empleado.setSalario(Double.parseDouble(cajaSalario.getText()));
 				empleado.setCargo(cajaCargo.getText());
 
-				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				empleadoDAO.setEmpleado(empleado);
-				empleadoDAO.setOpcion(1);
-				empleadoDAO.start();
+				VentanaPrincipal.empleadoDAO.setEmpleado(empleado);
+				VentanaPrincipal.empleadoDAO.setOpcion(1);
+
+				Thread h1 = new Thread(VentanaPrincipal.empleadoDAO);
+				h1.start();
 
 				try {
-					empleadoDAO.join();
+					h1.join();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}

@@ -22,6 +22,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	JLabel txtTitulo;
 
 	Usuario usuario = new Usuario();
+	ConexionBD con = new ConexionBD();
 
 	public VentanaLogin() {
 
@@ -71,7 +72,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		pack();
 		setLocationRelativeTo(null);
 		
-		ConexionBD.getConexion();
 
 	}
 
@@ -98,8 +98,9 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			usuario.setContrasenia(pass);
 
 			try {
-				if (ConexionBD.consultarUsuario(usuario).next()) {
+				if (con.consultarUsuario(usuario).next()) {
 					new VentanaPrincipal();
+					con.cerrarConexion();
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "datos erroneos");

@@ -17,16 +17,18 @@ import vista.empleados.ConsultasEmpleados;
 
 public class ConexionBD {
 
-	private static Connection conexion = null;
-	private static PreparedStatement pstm;
-	private static ResultSet rs;
-	private static String consultaA;
+	private Connection conexion = null;
+	private PreparedStatement pstm;
+	private ResultSet rs;
+	
 
-	private ConexionBD() {
+	public ConexionBD() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
 			conexion = DriverManager.getConnection(URL, "root", "12345");
+			
+			System.out.println("conexion nueva");
 
 		} catch (ClassNotFoundException e) {
 
@@ -39,14 +41,14 @@ public class ConexionBD {
 		}
 	}
 
-	public static Connection getConexion() {
+	public Connection getConexion() {
 		if (conexion == null) {
 			new ConexionBD();
 		}
 		return conexion;
 	}
 
-	public static void cerrarConexion() {
+	public void cerrarConexion() {
 		try {
 			pstm.close();
 			conexion.close();
@@ -57,7 +59,7 @@ public class ConexionBD {
 	}
 
 
-	public static ResultSet consultarUsuario(Usuario u) {
+	public ResultSet consultarUsuario(Usuario u) {
 		try {
 			String consulta = "select * from usuarios where usuario=? AND contrasenia=?";
 			pstm = conexion.prepareStatement(consulta);
@@ -73,7 +75,7 @@ public class ConexionBD {
 		return rs;
 	}
 
-	public static boolean altaEmpleado(Empleado e) {
+	public boolean altaEmpleado(Empleado e) {
 		try {
 
 			String filtro = "insert into empleados values (null,?,?,?,?)";
@@ -95,7 +97,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public static boolean bajaEmpleado(Empleado e) {
+	public boolean bajaEmpleado(Empleado e) {
 		try {
 			String consulta = "delete from empleados where ";
 			int pos = 1;
@@ -140,7 +142,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public static boolean cambioEmpleado(Empleado e) {
+	public boolean cambioEmpleado(Empleado e) {
 		
 		try {
 			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
@@ -161,17 +163,15 @@ public class ConexionBD {
 		return false;
 	}
 
-	public static void obtenerConsulta(Empleado empleado) {
+	public void obtenerConsulta(Empleado empleado) {
 
 		ResultSetTableModel modeloDatos = null;
 		String consulta = "select * from empleados where ";
 		consulta += generarConsultaEmpleadoModel(empleado);
 
-		consultaA = consulta;
-
 		try {
 			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
-					consultaA);
+					consulta);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -182,7 +182,7 @@ public class ConexionBD {
 
 	}
 	
-	public static ResultSet consultaEmpleado(Empleado e) {
+	public ResultSet consultaEmpleado(Empleado e) {
 		
 		try {
 			String consulta = "select * from empleados where id_empleado=?";
@@ -196,7 +196,7 @@ public class ConexionBD {
 		return rs;
 	}
 
-	public static String generarConsultaEmpleado(Empleado e) {
+	public String generarConsultaEmpleado(Empleado e) {
 
 		String consulta = "";
 		if (e.getIdEmpleado() != 0) {
@@ -225,7 +225,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static String generarConsultaEmpleadoModel(Empleado e) {
+	public String generarConsultaEmpleadoModel(Empleado e) {
 
 		String consulta = "";
 		if (e.getIdEmpleado() != 0) {
@@ -254,7 +254,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static void actualizarTabla() {
+	public void actualizarTabla() {
 		String consulta;
 		consulta = "SELECT * FROM empleados";
 

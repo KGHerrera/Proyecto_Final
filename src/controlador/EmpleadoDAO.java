@@ -5,28 +5,39 @@ import java.sql.ResultSet;
 import conexion.ConexionBD;
 import modelo.Empleado;
 
-public class EmpleadoDAO extends Thread {
+public class EmpleadoDAO implements Runnable {
 
 	private int opcion;
 	private Empleado empleado;
+	private ConexionBD con = new ConexionBD();
+	private boolean res;
 
-	@SuppressWarnings("unused")
-	private static ResultSet rs;
+	public boolean isRes() {
+		return res;
+	}
+
+	public void setRes(boolean res) {
+		this.res = res;
+	}
+
+	public ConexionBD getCon() {
+		return con;
+	}
 
 	public boolean altaEmpleado(Empleado e) {
-		return ConexionBD.altaEmpleado(e);
+		return con.altaEmpleado(e);
 	}
 
 	public boolean bajaEmpleado(Empleado e) {
-		return ConexionBD.bajaEmpleado(e);
+		return con.bajaEmpleado(e);
 	}
 
 	public boolean cambioEmpleado(Empleado e) {
-		return ConexionBD.cambioEmpleado(e);
+		return con.cambioEmpleado(e);
 	}
 
 	public void obtenerConsulta(Empleado e) {
-		ConexionBD.obtenerConsulta(e);
+		con.obtenerConsulta(e);
 	}
 
 	public void consultar() {
@@ -58,7 +69,7 @@ public class EmpleadoDAO extends Thread {
 	}
 
 	public Empleado buscarEmpleadoID(Empleado e) {
-		ResultSet rs = ConexionBD.consultaEmpleado(e);
+		ResultSet rs = con.consultaEmpleado(e);
 
 		if (rs != null) {
 			try {

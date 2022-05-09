@@ -1,12 +1,11 @@
 package vista.empleados;
 
 import java.awt.event.ActionEvent;
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
-import controlador.EmpleadoDAO;
+import vista.VentanaPrincipal;
+
 
 @SuppressWarnings("serial")
 public class BajasEmpleados extends VentanaEmpleados {
@@ -54,17 +53,22 @@ public class BajasEmpleados extends VentanaEmpleados {
 				if (!cajaCargo.getText().equals("")) {
 					empleado.setCargo(cajaCargo.getText());
 				}
+				
+				
+				
+				VentanaPrincipal.empleadoDAO.setEmpleado(empleado);
+				VentanaPrincipal.empleadoDAO.setOpcion(2);
 
-				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				empleadoDAO.setEmpleado(empleado);
-				empleadoDAO.setOpcion(2);
-				empleadoDAO.start();
+				Thread h1 = new Thread(VentanaPrincipal.empleadoDAO);
+				h1.start();
 
 				try {
-					empleadoDAO.join();
+					h1.join();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				
+				
 			}
 		}
 

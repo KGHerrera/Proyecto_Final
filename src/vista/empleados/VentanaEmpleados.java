@@ -8,11 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.border.Border;
-
-import controlador.EmpleadoDAO;
 import modelo.Empleado;
+import vista.VentanaPrincipal;
 
 @SuppressWarnings("serial")
 public class VentanaEmpleados extends JInternalFrame implements ActionListener, KeyListener {
@@ -159,20 +157,18 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
 		jp.setBorder(line);
 		add(jp);
-		
+
 		tablaEmpleados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cargarDatosEmpleados(e, tablaEmpleados);
 				activarCajas();
-				
+
 				if (s.equals("s")) {
 					cajaIdEmpleado.setEnabled(false);
 					cajaIdEmpleado.setText(null);
 				}
-				
 
-				
 			}
 		});
 
@@ -198,13 +194,11 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	}
 
 	public void cargarDatosEmpleados(java.awt.event.MouseEvent evt, JTable tablaEmpleados) {
-
 		cajaIdEmpleado.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 0)));
 		cajaNombre.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 1));
 		cajaApellido.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 2));
 		cajaSalario.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 3)));
 		cajaCargo.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 4));
-
 	}
 
 	public void activarCajas() {
@@ -228,13 +222,11 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 			if (!cajaIdEmpleado.getText().equals("")) {
 
-				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-
 				limpiarObjeto(empleado);
 				empleado.setIdEmpleado(Integer.parseInt(cajaIdEmpleado.getText()));
-				empleadoDAO.setEmpleado(empleado);
+				VentanaPrincipal.empleadoDAO.setEmpleado(empleado);
 
-				empleado = empleadoDAO.buscarEmpleadoID(empleado);
+				empleado = VentanaPrincipal.empleadoDAO.buscarEmpleadoID(empleado);
 
 				if (empleado.getNombre() != null) {
 
