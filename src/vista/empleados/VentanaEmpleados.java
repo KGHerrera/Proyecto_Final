@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.border.Border;
 
-import conexion.ConexionBD;
 import controlador.EmpleadoDAO;
 import modelo.Empleado;
 
@@ -143,24 +144,37 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		add(btnEnviar);
 		add(btnCancelar);
 		add(btnBuscar);
-
 		add(txtTitulo);
 
 		setSize(1366 - 600, 680);
 		setLocation(getWidth() / 2 - getWidth() / 7, 0);
 
-		ConexionBD.getConexion();
-
 	}
 
-	public void alinearTabla(JTable t) {
+	public void configurarTabla(JTable tablaEmpleados, String s) {
 
-		jp = new JScrollPane(t);
+		jp = new JScrollPane(tablaEmpleados);
 		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
 
 		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
 		jp.setBorder(line);
 		add(jp);
+		
+		tablaEmpleados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarDatosEmpleados(e, tablaEmpleados);
+				activarCajas();
+				
+				if (s.equals("s")) {
+					cajaIdEmpleado.setEnabled(false);
+					cajaIdEmpleado.setText(null);
+				}
+				
+
+				
+			}
+		});
 
 	}
 
@@ -183,6 +197,31 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		}
 	}
 
+	public void cargarDatosEmpleados(java.awt.event.MouseEvent evt, JTable tablaEmpleados) {
+
+		cajaIdEmpleado.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 0)));
+		cajaNombre.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 1));
+		cajaApellido.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 2));
+		cajaSalario.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 3)));
+		cajaCargo.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 4));
+
+	}
+
+	public void activarCajas() {
+
+		checkIdEmpleado.setSelected(true);
+		checkNombre.setSelected(true);
+		checkApellido.setSelected(true);
+		checkSalario.setSelected(true);
+		checkCargo.setSelected(true);
+
+		cajaIdEmpleado.setEnabled(true);
+		cajaNombre.setEnabled(true);
+		cajaApellido.setEnabled(true);
+		cajaSalario.setEnabled(true);
+		cajaCargo.setEnabled(true);
+	}
+
 	public void validacion(ActionEvent e) {
 
 		if (e.getSource() == btnBuscar) {
@@ -190,7 +229,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 			if (!cajaIdEmpleado.getText().equals("")) {
 
 				EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-				
+
 				limpiarObjeto(empleado);
 				empleado.setIdEmpleado(Integer.parseInt(cajaIdEmpleado.getText()));
 				empleadoDAO.setEmpleado(empleado);
@@ -198,20 +237,14 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 				empleado = empleadoDAO.buscarEmpleadoID(empleado);
 
 				if (empleado.getNombre() != null) {
+
+					cajaIdEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
 					cajaNombre.setText(empleado.getNombre());
 					cajaApellido.setText(empleado.getApellido());
 					cajaSalario.setText(String.valueOf(empleado.getSalario()));
 					cajaCargo.setText(empleado.getCargo());
-					
-					checkNombre.setSelected(true);
-					checkApellido.setSelected(true);
-					checkSalario.setSelected(true);
-					checkCargo.setSelected(true);
-					
-					cajaNombre.setEnabled(true);
-					cajaApellido.setEnabled(true);
-					cajaSalario.setEnabled(true);
-					cajaCargo.setEnabled(true);
+
+					activarCajas();
 				}
 
 			}

@@ -178,7 +178,7 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 
-		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
+		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
 
 	}
 	
@@ -269,10 +269,10 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 
-		AltasEmpleados.tablaAltas.setModel(modeloDatos);
-		ConsultasEmpleados.tablaConsultas.setModel(modeloDatos);
-		CambiosEmpleados.tablaCambios.setModel(modeloDatos);
-		BajasEmpleados.tablaBajas.setModel(modeloDatos);
+		AltasEmpleados.tablaEmpleados.setModel(modeloDatos);
+		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
+		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
+		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
 	}
 
 }

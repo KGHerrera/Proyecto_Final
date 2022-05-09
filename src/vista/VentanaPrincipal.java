@@ -2,6 +2,7 @@ package vista;
 
 import javax.swing.*;
 
+import conexion.ConexionBD;
 import vista.empleados.*;
 import vista.libros.*;
 import vista.ventas.*;
@@ -164,8 +165,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		add(desktopPane, BorderLayout.CENTER);
 
 		setLocationRelativeTo(null);
+		
+		ConexionBD.getConexion();
+		
+		ConexionBD.actualizarTabla();
 
 	}
+	
+	
 
 	public void esconderVentanas() {
 		internalFrameAltasEmpleados.setVisible(false);
