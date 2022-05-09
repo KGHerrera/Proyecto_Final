@@ -20,15 +20,12 @@ public class ConexionBD {
 	private Connection conexion = null;
 	private PreparedStatement pstm;
 	private ResultSet rs;
-	
 
 	public ConexionBD() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
 			conexion = DriverManager.getConnection(URL, "root", "12345");
-			
-			System.out.println("conexion nueva");
 
 		} catch (ClassNotFoundException e) {
 
@@ -57,7 +54,6 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 	}
-
 
 	public ResultSet consultarUsuario(Usuario u) {
 		try {
@@ -143,7 +139,7 @@ public class ConexionBD {
 	}
 
 	public boolean cambioEmpleado(Empleado e) {
-		
+
 		try {
 			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
 			pstm = conexion.prepareStatement(consulta);
@@ -181,9 +177,9 @@ public class ConexionBD {
 		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
 
 	}
-	
+
 	public ResultSet consultaEmpleado(Empleado e) {
-		
+
 		try {
 			String consulta = "select * from empleados where id_empleado=?";
 			pstm = conexion.prepareStatement(consulta);

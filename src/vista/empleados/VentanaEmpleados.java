@@ -20,7 +20,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	JTextField cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo;
 
 	JCheckBox checkIdEmpleado, checkNombre, checkApellido, checkSalario, checkCargo;
-	JButton btnEnviar, btnVaciar, btnBuscar, btnCancelar;
+	JButton btnEnviar, btnVaciar, btnBuscar, btnCancelar, btnActualizar;
 
 	JLabel txtTitulo, txtIcono;
 	ImageIcon iconEmpleado;
@@ -63,6 +63,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnVaciar = new JButton("vaciar");
 		btnBuscar = new JButton("buscar");
 		btnCancelar = new JButton("cancelar");
+		btnActualizar = new JButton("actualizar");
 
 		txtIcono = new JLabel();
 		iconEmpleado = new ImageIcon("src/iconos/altas.png");
@@ -92,6 +93,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		checkCargo.setBounds(this.getWidth() / 4 + 40, 240, 20, 20);
 
 		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 20);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 20);
+		
 		btnEnviar.setBounds(this.getWidth() / 2 + 140, 160, 100, 20);
 		btnVaciar.setBounds(this.getWidth() / 2 + 140, 200, 100, 20);
 		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 20);
@@ -100,6 +103,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnEnviar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnBuscar.addActionListener(this);
+		btnActualizar.addActionListener(this);
 
 		checkIdEmpleado.addActionListener(this);
 		checkNombre.addActionListener(this);
@@ -142,6 +146,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		add(btnEnviar);
 		add(btnCancelar);
 		add(btnBuscar);
+		add(btnActualizar);
 		add(txtTitulo);
 
 		setSize(1366 - 600, 680);
@@ -292,6 +297,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 			}
 		} else if (e.getSource() == btnCancelar) {
 			setVisible(false);
+		} else if(e.getSource() == btnActualizar) {
+			VentanaPrincipal.empleadoDAO.getCon().actualizarTabla();
 		}
 
 	}
