@@ -41,23 +41,21 @@ public class LibroDAO implements Runnable {
 		return con.bajaLibro(e);
 	}
 
-	/*
-	 * 
-	 * public boolean cambioEmpleado(Empleado e) { return con.cambioEmpleado(e); }
-	 * 
-	 * public void obtenerConsulta(Empleado e) { con.obtenerConsulta(e); }
-	 */
+	public boolean cambioLibro(Libro e) {
+		return con.cambioLibro(e);
+	}
+
+	// public void obtenerConsulta(Empleado e) { con.obtenerConsulta(e); }
 
 	public void consultar() {
-		if (opcion == 1) {
+		if (opcion == 1)
 			altaLibro(libro);
-		} else if (opcion == 2) {
+		else if (opcion == 2)
 			bajaLibro(libro);
-		} /*else if (opcion == 3) {
-			cambioEmpleado(empleado);
-		} else if (opcion == 4) {
-			obtenerConsulta(empleado);
-		} */
+		else if (opcion == 3)
+			cambioLibro(libro);
+		// else if (opcion == 4)obtenerConsulta(empleado);
+
 	}
 
 	public int getOpcion() {

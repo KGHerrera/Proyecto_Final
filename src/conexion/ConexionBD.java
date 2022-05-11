@@ -17,6 +17,7 @@ import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
 import vista.libros.AltasLibros;
 import vista.libros.BajasLibros;
+import vista.libros.CambiosLibros;
 
 public class ConexionBD {
 
@@ -340,6 +341,27 @@ public class ConexionBD {
 		}
 		return false;
 	}
+	
+	public boolean cambioLibro(Libro e) {
+
+		try {
+			String consulta = "update libros set nombre=?, autor=?, stock=?, precio=? WHERE id_libro=?";
+			pstm = conexion.prepareStatement(consulta);
+			pstm.setString(1, e.getNombre());
+			pstm.setString(2, e.getAutor());
+			pstm.setInt(3, e.getStock());
+			pstm.setDouble(4, e.getPrecio());
+			pstm.setInt(5, e.getIdLibro());
+			pstm.executeUpdate();
+
+			actualizarTablaLibros();
+			return true;
+
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		return false;
+	}
 
 	public String generarConsultaLibro(Libro e) {
 
@@ -387,6 +409,8 @@ public class ConexionBD {
 
 		AltasLibros.tablaLibros.setModel(modeloDatos);
 		BajasLibros.tablaLibros.setModel(modeloDatos);
+		
+		CambiosLibros.tablaLibros.setModel(modeloDatos);
 
 	}
 

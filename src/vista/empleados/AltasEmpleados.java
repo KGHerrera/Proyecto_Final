@@ -35,8 +35,6 @@ public class AltasEmpleados extends VentanaEmpleados {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		validacion(e);
-
 		if (e.getSource() == btnEnviar) {
 			if (!cajaNombre.getText().equals("") && !cajaApellido.getText().equals("")
 					&& !cajaCargo.getText().equals("") && !cajaSalario.getText().equals("")) {
@@ -58,10 +56,12 @@ public class AltasEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
+
 				restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 
 			}
+		} else {
+			validacion(e);
 		}
 
 	}

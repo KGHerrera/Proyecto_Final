@@ -41,15 +41,15 @@ public class EmpleadoDAO implements Runnable {
 	}
 
 	public void consultar() {
-		if (opcion == 1) {
+		if (opcion == 1)
 			altaEmpleado(empleado);
-		} else if (opcion == 2) {
+		else if (opcion == 2)
 			bajaEmpleado(empleado);
-		} else if (opcion == 3) {
+		else if (opcion == 3)
 			cambioEmpleado(empleado);
-		} else if (opcion == 4) {
+		else if (opcion == 4)
 			obtenerConsulta(empleado);
-		} 
+
 	}
 
 	public Empleado getEmpleado() {
@@ -91,7 +91,7 @@ public class EmpleadoDAO implements Runnable {
 			}
 
 		}
-		
+
 		e.setNombre(null);
 		e.setApellido(null);
 		e.setSalario(0.0);

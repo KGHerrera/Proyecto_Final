@@ -26,7 +26,7 @@ public class CambiosEmpleados extends VentanaEmpleados {
 		checkApellido.setVisible(false);
 		checkSalario.setVisible(false);
 		checkCargo.setVisible(false);
-		
+
 		btnActualizar.setVisible(false);
 
 		tablaEmpleados = new JTable();
@@ -36,12 +36,6 @@ public class CambiosEmpleados extends VentanaEmpleados {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		validacion(e);
-
-		if (e.getSource() == btnVaciar) {
-			restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
-		}
 
 		if (e.getSource() == btnEnviar) {
 			if (!cajaIdEmpleado.getText().equals("") && !cajaNombre.getText().equals("")
@@ -68,6 +62,8 @@ public class CambiosEmpleados extends VentanaEmpleados {
 				}
 
 			}
+		} else {
+			validacion(e);
 		}
 	}
 }
