@@ -3,6 +3,7 @@ package vista;
 import javax.swing.*;
 
 import controlador.EmpleadoDAO;
+import controlador.LibroDAO;
 import vista.empleados.*;
 import vista.libros.*;
 import vista.ventas.*;
@@ -26,6 +27,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	JDesktopPane desktopPane;
 	
 	public static EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+	public static LibroDAO libroDAO = new LibroDAO();
 
 	public VentanaPrincipal() {
 
@@ -165,6 +167,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 
 		VentanaPrincipal.empleadoDAO.getCon().actualizarTabla();
+		VentanaPrincipal.empleadoDAO.getCon().actualizarTablaLibros();
 
 	}
 

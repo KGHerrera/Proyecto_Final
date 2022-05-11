@@ -7,7 +7,7 @@ public class Main {
 			@Override
 			public void run() {				
 				// TODO Auto-generated method stub
-				new VentanaLogin();
+				new VentanaPrincipal();
 						
 			}
 		});

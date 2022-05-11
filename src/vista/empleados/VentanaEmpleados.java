@@ -59,7 +59,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		checkSalario = new JCheckBox();
 		checkCargo = new JCheckBox();
 
-		btnEnviar = new JButton("enviar");
+		btnEnviar = new JButton("agregar");
 		btnVaciar = new JButton("vaciar");
 		btnBuscar = new JButton("buscar");
 		btnCancelar = new JButton("cancelar");

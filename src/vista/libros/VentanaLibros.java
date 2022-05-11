@@ -1,23 +1,28 @@
 package vista.libros;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.border.Border;
+import modelo.Libro;
 
 @SuppressWarnings("serial")
 public class VentanaLibros extends JInternalFrame implements ActionListener, KeyListener {
-
+	
+	Libro libro = new Libro();
 	JTextField cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock;
-	JTable tablaLibros;
 	JCheckBox checkIdLibro, checkNombre, checkAutor, checkPrecio, checkStock;
-	JButton btnEnviar, btnVaciar;
+	JButton btnEnviar, btnVaciar, btnBuscar, btnCancelar, btnActualizar;
 
 	JLabel txtTitulo, txtIcono;
 	ImageIcon iconLibros;
+	JScrollPane jp;
 
 	public VentanaLibros() {
 
@@ -25,7 +30,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Libros");
 		setSize(1366 - 500, 650);
-		
+
 		setResizable(true);
 		setVisible(true);
 		setClosable(true);
@@ -52,46 +57,50 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		checkPrecio = new JCheckBox();
 		checkStock = new JCheckBox();
 
-		btnEnviar = new JButton("enviar");
-		btnVaciar = new JButton("vaciar");
-		
+		btnEnviar = new JButton("agregar");
+		btnVaciar = new JButton("limpiar");
+		btnBuscar = new JButton("buscar");
+		btnCancelar = new JButton("cancelar");
+		btnActualizar = new JButton("actualizar");
+
 		txtIcono = new JLabel();
 		iconLibros = new ImageIcon("src/iconos/altasLibro.png");
-		
+
 		txtIcono.setIcon(iconLibros);
 
 		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
 
-		txtIdLibro.setBounds(this.getWidth() / 3, 80, 100, 20);
-		txtNombre.setBounds(this.getWidth() / 3, 120, 100, 20);
-		txtAutor.setBounds(this.getWidth() / 3, 160, 100, 20);
-		txtPrecio.setBounds(this.getWidth() / 3, 200, 100, 20);
-		txtStock.setBounds(this.getWidth() / 3, 240, 100, 20);
-		
+		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 80, 100, 20);
+		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 20);
+		txtAutor.setBounds(this.getWidth() / 4 + 90, 160, 100, 20);
+		txtStock.setBounds(this.getWidth() / 4 + 90, 200, 100, 20);
+		txtPrecio.setBounds(this.getWidth() / 4 + 90, 240, 100, 20);
+
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
-		cajaIdLibro.setBounds(this.getWidth() / 2 + 70, 80, 100, 20);
-		cajaNombre.setBounds(this.getWidth() / 2 + 70, 120, 100, 20);
-		cajaAutor.setBounds(this.getWidth() / 2 + 70, 160, 100, 20);
-		cajaPrecio.setBounds(this.getWidth() / 2 + 70, 200, 100, 20);
-		cajaStock.setBounds(this.getWidth() / 2 + 70, 240, 100, 20);
+		cajaIdLibro.setBounds(this.getWidth() / 2, 80, 100, 20);
+		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 20);
+		cajaAutor.setBounds(this.getWidth() / 2, 160, 100, 20);
+		cajaStock.setBounds(this.getWidth() / 2, 200, 100, 20);
+		cajaPrecio.setBounds(this.getWidth() / 2, 240, 100, 20);
 
-		checkIdLibro.setBounds(this.getWidth() / 2 + 220, 80, 100, 20);
-		checkNombre.setBounds(this.getWidth() / 2 + 220, 120, 100, 20);
-		checkAutor.setBounds(this.getWidth() / 2 + 220, 160, 100, 20);
-		checkPrecio.setBounds(this.getWidth() / 2 + 220, 200, 100, 20);
-		checkStock.setBounds(this.getWidth() / 2 + 220, 240, 100, 20);
+		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 80, 20, 20);
+		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 20);
+		checkAutor.setBounds(this.getWidth() / 4 + 40, 160, 20, 20);
+		checkStock.setBounds(this.getWidth() / 4 + 40, 200, 20, 20);
+		checkPrecio.setBounds(this.getWidth() / 4 + 40, 240, 20, 20);
 
-		btnEnviar.setBounds(this.getWidth() / 2 + 70, 280, 100, 20);
-		btnVaciar.setBounds(this.getWidth() / 3, 280, 100, 20);
-
-		tablaLibros = new JTable();
-		tablaLibros.setBounds(this.getWidth() / 12, 320, 630, 270);
-
-		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
-		tablaLibros.setBorder(line);
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 20);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 20);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 160, 100, 20);
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 200, 100, 20);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 20);
 
 		btnVaciar.addActionListener(this);
+		btnEnviar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnBuscar.addActionListener(this);
+		btnActualizar.addActionListener(this);
 
 		checkIdLibro.addActionListener(this);
 		checkNombre.addActionListener(this);
@@ -132,14 +141,64 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 
 		add(btnVaciar);
 		add(btnEnviar);
+		add(btnCancelar);
+		add(btnBuscar);
+		add(btnActualizar);
+		add(txtTitulo);
 
 		add(txtTitulo);
 
-		add(tablaLibros);
-		
 		setSize(1366 - 600, 680);
-		setLocation(getWidth()/2 - getWidth()/7, 0);
+		setLocation(getWidth() / 2 - getWidth() / 7, 0);
 
+	}
+
+	public void configurarTabla(JTable tablaLibros, String s) {
+
+		jp = new JScrollPane(tablaLibros);
+		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
+
+		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
+		jp.setBorder(line);
+		add(jp);
+
+		tablaLibros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarDatosLibros(e, tablaLibros);
+				activarCajas();
+
+				if (s.equals("s")) {
+					cajaIdLibro.setEnabled(false);
+					cajaIdLibro.setText(null);
+				}
+
+			}
+		});
+
+	}
+
+	public void cargarDatosLibros(java.awt.event.MouseEvent evt, JTable tablaLibros) {
+		cajaIdLibro.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 0)));
+		cajaNombre.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 1));
+		cajaAutor.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 2));
+		cajaStock.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 3)));
+		cajaPrecio.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 4)));
+	}
+
+	public void activarCajas() {
+
+		checkIdLibro.setSelected(true);
+		checkNombre.setSelected(true);
+		checkAutor.setSelected(true);
+		checkStock.setSelected(true);
+		checkPrecio.setSelected(true);
+
+		cajaIdLibro.setEnabled(true);
+		cajaNombre.setEnabled(true);
+		cajaAutor.setEnabled(true);
+		cajaStock.setEnabled(true);
+		cajaPrecio.setEnabled(true);
 	}
 
 	public void restablecerComponentes(JComponent... componentes) {
@@ -152,9 +211,8 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 				((JCheckBox) c).setSelected(false);
 		}
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	
+	public void validacion(ActionEvent e) {
 		if (e.getSource() == btnVaciar) {
 			restablecerComponentes(cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock);
 		}
@@ -203,6 +261,18 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 				cajaStock.setText("");
 			}
 		}
+	}
+	
+	public void limpiarObjeto(Libro e) {
+		e.setIdLibro(0);
+		e.setNombre(null);
+		e.setAutor(null);
+		e.setPrecio(0.0);
+		e.setStock(0);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
 
 	}
 

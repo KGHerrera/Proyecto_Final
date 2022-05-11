@@ -2,6 +2,7 @@ package conexion;
 
 import modelo.Usuario;
 import modelo.Empleado;
+import modelo.Libro;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +15,7 @@ import vista.empleados.AltasEmpleados;
 import vista.empleados.BajasEmpleados;
 import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
+import vista.libros.AltasLibros;
 
 public class ConexionBD {
 
@@ -26,6 +28,8 @@ public class ConexionBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
 			conexion = DriverManager.getConnection(URL, "root", "12345");
+			
+			System.out.println("conexion");
 
 		} catch (ClassNotFoundException e) {
 
@@ -269,6 +273,61 @@ public class ConexionBD {
 		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
 		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
 		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
+	}
+	
+	public boolean altaLibro(Libro e) {
+		try {
+
+			String filtro = "insert into libros values (null,?,?,?,?)";
+			pstm = conexion.prepareStatement(filtro);
+
+			pstm.setString(1, e.getNombre());
+			pstm.setString(2, e.getAutor());
+			pstm.setDouble(3, e.getPrecio());
+			pstm.setInt(4, e.getStock());
+			pstm.executeUpdate();
+
+			actualizarTablaLibros();
+
+			return true;
+
+		} catch (SQLException error) {
+			error.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void actualizarTablaLibros() {
+		String consulta;
+		consulta = "SELECT * FROM libros";
+
+		ResultSetTableModel modeloDatos = null;
+
+		try {
+			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
+					consulta);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		AltasLibros.tablaLibros.setModel(modeloDatos);
+		
+	}
+	
+	public ResultSet consultaLibro(Libro e) {
+
+		try {
+			String consulta = "select * from libros where id_libro=?";
+			pstm = conexion.prepareStatement(consulta);
+			pstm.setInt(1, e.getIdLibro());
+			rs = pstm.executeQuery();
+
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		return rs;
 	}
 
 }

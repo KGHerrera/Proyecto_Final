@@ -15,6 +15,10 @@ public class Libro {
 		this.stock = stock;
 		this.precio = precio;
 	}
+	
+	public Libro() {
+		
+	}
 
 	public int getIdLibro() {
 		return idLibro;
