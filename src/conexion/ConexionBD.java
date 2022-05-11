@@ -16,6 +16,7 @@ import vista.empleados.BajasEmpleados;
 import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
 import vista.libros.AltasLibros;
+import vista.libros.BajasLibros;
 
 public class ConexionBD {
 
@@ -28,8 +29,6 @@ public class ConexionBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
 			conexion = DriverManager.getConnection(URL, "root", "12345");
-			
-			System.out.println("conexion");
 
 		} catch (ClassNotFoundException e) {
 
@@ -274,7 +273,7 @@ public class ConexionBD {
 		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
 		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
 	}
-	
+
 	public boolean altaLibro(Libro e) {
 		try {
 
@@ -296,7 +295,81 @@ public class ConexionBD {
 		}
 		return false;
 	}
-	
+
+	public boolean bajaLibro(Libro e) {
+		try {
+			String consulta = "delete from libros where ";
+			int pos = 1;
+			consulta += generarConsultaLibro(e);
+
+			pstm = conexion.prepareStatement(consulta);
+
+			if (e.getIdLibro() != 0) {
+				pstm.setInt(pos, e.getIdLibro());
+				pos++;
+			}
+
+			if (e.getNombre() != null) {
+				pstm.setString(pos, e.getNombre());
+				pos++;
+			}
+
+			if (e.getAutor() != null) {
+				pstm.setString(pos, e.getAutor());
+				pos++;
+			}
+
+			if (e.getStock() != 0) {
+				pstm.setInt(pos, e.getStock());
+				pos++;
+			}
+
+			if (e.getPrecio() != 0.0) {
+				pstm.setDouble(pos, e.getPrecio());
+				pos++;
+			}
+
+			pstm.executeUpdate();
+
+			actualizarTablaLibros();
+
+			return true;
+
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		return false;
+	}
+
+	public String generarConsultaLibro(Libro e) {
+
+		String consulta = "";
+		if (e.getIdLibro() != 0) {
+			consulta += "id_libro=? and ";
+		}
+
+		if (e.getNombre() != null) {
+			consulta += "nombre=? and ";
+		}
+
+		if (e.getAutor() != null) {
+			consulta += "autor=? and ";
+		}
+
+		if (e.getStock() != 0) {
+			consulta += "stock=? and ";
+		}
+
+		if (e.getPrecio() != 0.0) {
+			consulta += "precio=? and ";
+		}
+
+		if ((consulta.substring(consulta.length() - 4, consulta.length()).equals("and ")))
+			consulta = consulta.substring(0, consulta.length() - 4);
+
+		return consulta;
+	}
+
 	public void actualizarTablaLibros() {
 		String consulta;
 		consulta = "SELECT * FROM libros";
@@ -313,9 +386,10 @@ public class ConexionBD {
 		}
 
 		AltasLibros.tablaLibros.setModel(modeloDatos);
-		
+		BajasLibros.tablaLibros.setModel(modeloDatos);
+
 	}
-	
+
 	public ResultSet consultaLibro(Libro e) {
 
 		try {

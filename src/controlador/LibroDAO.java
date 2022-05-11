@@ -12,7 +12,7 @@ public class LibroDAO implements Runnable {
 	private Libro libro;
 	private ConexionBD con = VentanaPrincipal.empleadoDAO.getCon();
 	private boolean res;
-	
+
 	public Libro getLibro() {
 		return libro;
 	}
@@ -37,35 +37,28 @@ public class LibroDAO implements Runnable {
 		return con.altaLibro(e);
 	}
 
+	public boolean bajaLibro(Libro e) {
+		return con.bajaLibro(e);
+	}
+
 	/*
-	public boolean bajaEmpleado(Empleado e) {
-		return con.bajaEmpleado(e);
-	}
-
-	public boolean cambioEmpleado(Empleado e) {
-		return con.cambioEmpleado(e);
-	}
-
-	public void obtenerConsulta(Empleado e) {
-		con.obtenerConsulta(e);
-	}
-	*/
+	 * 
+	 * public boolean cambioEmpleado(Empleado e) { return con.cambioEmpleado(e); }
+	 * 
+	 * public void obtenerConsulta(Empleado e) { con.obtenerConsulta(e); }
+	 */
 
 	public void consultar() {
 		if (opcion == 1) {
 			altaLibro(libro);
-		}
-		/*
 		} else if (opcion == 2) {
-			bajaEmpleado(empleado);
-		} else if (opcion == 3) {
+			bajaLibro(libro);
+		} /*else if (opcion == 3) {
 			cambioEmpleado(empleado);
 		} else if (opcion == 4) {
 			obtenerConsulta(empleado);
 		} */
 	}
-
-	
 
 	public int getOpcion() {
 		return opcion;
@@ -75,7 +68,7 @@ public class LibroDAO implements Runnable {
 		this.opcion = opcion;
 	}
 
-	public Libro buscarEmpleadoID(Libro e) {
+	public Libro buscarLibroID(Libro e) {
 		ResultSet rs = con.consultaLibro(e);
 
 		if (rs != null) {
@@ -98,7 +91,7 @@ public class LibroDAO implements Runnable {
 			}
 
 		}
-		
+
 		e.setNombre(null);
 		e.setAutor(null);
 		e.setStock(0);

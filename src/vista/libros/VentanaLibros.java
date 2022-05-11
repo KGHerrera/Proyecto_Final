@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.border.Border;
 import modelo.Libro;
+import vista.VentanaPrincipal;
 
 @SuppressWarnings("serial")
 public class VentanaLibros extends JInternalFrame implements ActionListener, KeyListener {
@@ -213,7 +214,33 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 	}
 	
 	public void validacion(ActionEvent e) {
-		if (e.getSource() == btnVaciar) {
+		
+		if (e.getSource() == btnBuscar) {
+
+			if (!cajaIdLibro.getText().equals("")) {
+
+				limpiarObjeto(libro);
+				libro.setIdLibro(Integer.parseInt(cajaIdLibro.getText()));
+				VentanaPrincipal.libroDAO.setLibro(libro);
+
+				libro = VentanaPrincipal.libroDAO.buscarLibroID(libro);
+
+				if (libro.getNombre() != null) {
+
+					cajaIdLibro.setText(String.valueOf(libro.getIdLibro()));
+					cajaNombre.setText(libro.getNombre());
+					cajaAutor.setText(libro.getAutor());
+					cajaPrecio.setText(String.valueOf(libro.getPrecio()));
+					cajaStock.setText(String.valueOf(libro.getStock()));
+
+					activarCajas();
+				}
+
+			}
+
+		}
+		
+		else if (e.getSource() == btnVaciar) {
 			restablecerComponentes(cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock);
 		}
 
@@ -260,6 +287,14 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 				cajaStock.setEnabled(false);
 				cajaStock.setText("");
 			}
+		}
+		
+		else if (e.getSource() == btnCancelar) {
+			setVisible(false);
+		} 
+		
+		else if(e.getSource() == btnActualizar) {
+			VentanaPrincipal.empleadoDAO.getCon().actualizarTablaLibros();
 		}
 	}
 	

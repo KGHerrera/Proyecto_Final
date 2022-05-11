@@ -26,6 +26,8 @@ public class CambiosEmpleados extends VentanaEmpleados {
 		checkApellido.setVisible(false);
 		checkSalario.setVisible(false);
 		checkCargo.setVisible(false);
+		
+		btnActualizar.setVisible(false);
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "n");

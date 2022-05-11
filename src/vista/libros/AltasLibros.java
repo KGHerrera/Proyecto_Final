@@ -12,6 +12,9 @@ public class AltasLibros extends VentanaLibros {
 	public static JTable tablaLibros;
 
 	public AltasLibros() {
+		
+		btnBuscar.setVisible(false);
+		btnActualizar.setVisible(false);
 
 		txtTitulo.setText("Agregar libro");
 		cajaNombre.setEnabled(true);

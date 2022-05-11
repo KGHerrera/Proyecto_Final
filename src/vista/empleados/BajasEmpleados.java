@@ -6,7 +6,6 @@ import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
 
-
 @SuppressWarnings("serial")
 public class BajasEmpleados extends VentanaEmpleados {
 
@@ -17,6 +16,7 @@ public class BajasEmpleados extends VentanaEmpleados {
 		btnEnviar.setText("eliminar");
 		iconEmpleado = new ImageIcon("src/iconos/bajas.png");
 		txtIcono.setIcon(iconEmpleado);
+		btnActualizar.setVisible(false);
 
 		BajasEmpleados.tablaEmpleados = new JTable();
 		configurarTabla(BajasEmpleados.tablaEmpleados, "n");
@@ -25,7 +25,6 @@ public class BajasEmpleados extends VentanaEmpleados {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		validacion(e);
 
 		if (e.getSource() == btnEnviar) {
 			if (!cajaIdEmpleado.getText().equals("") || !cajaNombre.getText().equals("")
@@ -53,9 +52,7 @@ public class BajasEmpleados extends VentanaEmpleados {
 				if (!cajaCargo.getText().equals("")) {
 					empleado.setCargo(cajaCargo.getText());
 				}
-				
-				
-				
+
 				VentanaPrincipal.empleadoDAO.setEmpleado(empleado);
 				VentanaPrincipal.empleadoDAO.setOpcion(2);
 
@@ -67,9 +64,10 @@ public class BajasEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				
+
 			}
+		} else {
+			validacion(e);
 		}
 
 	}

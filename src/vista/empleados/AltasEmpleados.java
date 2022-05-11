@@ -25,6 +25,7 @@ public class AltasEmpleados extends VentanaEmpleados {
 		checkCargo.setVisible(false);
 
 		btnBuscar.setVisible(false);
+		btnActualizar.setVisible(false);
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "s");
