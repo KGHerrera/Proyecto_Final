@@ -3,6 +3,7 @@ package vista.libros;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -61,7 +62,15 @@ public class CambiosLibros extends VentanaLibros {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				
+				if(VentanaPrincipal.libroDAO.isRes()) {
+					JOptionPane.showMessageDialog(null, "se modifico correctamente");
+				} else {
+					JOptionPane.showMessageDialog(null, "no se modifico");
+				}
 
+			} else {
+				JOptionPane.showMessageDialog(null, "faltan datos");
 			}
 		} else {
 			validacion(e);

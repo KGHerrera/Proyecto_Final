@@ -25,7 +25,8 @@ public class LibroDAO implements Runnable {
 
 
 	public boolean altaLibro(Libro e) {
-		return ConexionBD.altaLibro(e);
+		res = ConexionBD.altaLibro(e);
+		return res;
 	}
 
 	public boolean bajaLibro(Libro e) {
@@ -33,7 +34,8 @@ public class LibroDAO implements Runnable {
 	}
 
 	public boolean cambioLibro(Libro e) {
-		return ConexionBD.cambioLibro(e);
+		res = ConexionBD.cambioLibro(e);
+		return res;
 	}
 
 	public void obtenerConsulta(Libro e) {

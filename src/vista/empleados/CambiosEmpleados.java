@@ -2,6 +2,7 @@ package vista.empleados;
 
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -61,7 +62,15 @@ public class CambiosEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				
+				if(VentanaPrincipal.empleadoDAO.isRes()) {
+					JOptionPane.showMessageDialog(null, "se modifico correctamente");
+				} else {
+					JOptionPane.showMessageDialog(null, "no se modifico");
+				}
 
+			} else {
+				JOptionPane.showMessageDialog(null, "faltan datos");
 			}
 		} else {
 			validacion(e);

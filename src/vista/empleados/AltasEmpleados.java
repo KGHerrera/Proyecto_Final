@@ -1,6 +1,8 @@
 package vista.empleados;
 
 import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -56,9 +58,19 @@ public class AltasEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				
+				if(VentanaPrincipal.empleadoDAO.isRes()) {
+					JOptionPane.showMessageDialog(null, "se agrego correctamente");
+				} else {
+					JOptionPane.showMessageDialog(null, "no se agrego");
+				}
+				
+				
 
 				restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 
+			} else {
+				JOptionPane.showMessageDialog(null, "faltan datos");
 			}
 		} else {
 			validacion(e);

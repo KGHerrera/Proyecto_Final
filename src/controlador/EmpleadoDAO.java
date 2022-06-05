@@ -15,20 +15,19 @@ public class EmpleadoDAO implements Runnable {
 		return res;
 	}
 
-	public void setRes(boolean res) {
-		this.res = res;
-	}
-
 	public boolean altaEmpleado(Empleado e) {
-		return ConexionBD.altaEmpleado(e);
+		res = ConexionBD.altaEmpleado(e);
+		return res;
 	}
 
 	public boolean bajaEmpleado(Empleado e) {
-		return ConexionBD.bajaEmpleado(e);
+		res = ConexionBD.bajaEmpleado(e);
+		return res;
 	}
 
 	public boolean cambioEmpleado(Empleado e) {
-		return ConexionBD.cambioEmpleado(e);
+		res =  ConexionBD.cambioEmpleado(e);
+		return res;
 	}
 
 	public void obtenerConsulta(Empleado e) {

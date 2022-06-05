@@ -3,6 +3,7 @@ package vista.libros;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -67,7 +68,13 @@ public class BajasLibros extends VentanaLibros {
 					e1.printStackTrace();
 				}
 				
-				
+				if(VentanaPrincipal.libroDAO.isRes()) {
+					JOptionPane.showMessageDialog(null, "se elimino correctamente");
+				} else {
+					JOptionPane.showMessageDialog(null, "no se elimino");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "agrega datos");
 			}
 		} else {
 			validacion(e);
