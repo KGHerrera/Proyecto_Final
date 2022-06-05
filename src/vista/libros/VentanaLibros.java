@@ -201,6 +201,21 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		cajaStock.setEnabled(true);
 		cajaPrecio.setEnabled(true);
 	}
+	
+	public void dasactivarCajas() {
+
+		checkIdLibro.setSelected(false);
+		checkNombre.setSelected(false);
+		checkAutor.setSelected(false);
+		checkStock.setSelected(false);
+		checkPrecio.setSelected(false);
+
+		cajaIdLibro.setEnabled(false);
+		cajaNombre.setEnabled(false);
+		cajaAutor.setEnabled(false);
+		cajaStock.setEnabled(false);
+		cajaPrecio.setEnabled(false);
+	}
 
 	public void restablecerComponentes(JComponent... componentes) {
 		for (JComponent c : componentes) {
@@ -294,7 +309,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		} 
 		
 		else if(e.getSource() == btnActualizar) {
-			VentanaPrincipal.empleadoDAO.getCon().actualizarTablaLibros();
+			VentanaPrincipal.libroDAO.actualizarTabla();
 		}
 	}
 	
@@ -314,16 +329,17 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 	@Override
 	public void keyTyped(KeyEvent e) {
 
-		if (e.getSource() == cajaNombre || e.getSource() == cajaAutor) {
-			if (!Character.isLetter(e.getKeyChar()))
+		if (e.getSource() == cajaAutor || e.getSource() == cajaNombre) {
+			if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ') {
 				e.consume();
+			}
 		} else if (e.getSource() == cajaIdLibro || e.getSource() == cajaStock) {
 			if (!Character.isDigit(e.getKeyChar()))
 				e.consume();
 		} else if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
 				&& (e.getKeyChar() != '.' || cajaPrecio.getText().contains("."))) {
 			e.consume();
-		}
+		} 
 
 	}
 

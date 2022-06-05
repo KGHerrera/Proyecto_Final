@@ -22,9 +22,9 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	JLabel txtTitulo;
 
 	Usuario usuario = new Usuario();
-	ConexionBD con = new ConexionBD();
 
 	public VentanaLogin() {
+		ConexionBD.getConexion();
 
 		getContentPane().setLayout(gbl);
 		gbc.insets = new Insets(14, 20, 14, 20);
@@ -98,9 +98,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			usuario.setContrasenia(pass);
 
 			try {
-				if (con.consultarUsuario(usuario).next()) {
+				if (ConexionBD.consultarUsuario(usuario).next()) {
 					new VentanaPrincipal();
-					con.cerrarConexion();
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "datos erroneos");

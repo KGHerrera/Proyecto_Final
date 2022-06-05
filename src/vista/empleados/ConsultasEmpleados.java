@@ -1,12 +1,11 @@
 package vista.empleados;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
-
-
 
 @SuppressWarnings("serial")
 public class ConsultasEmpleados extends VentanaEmpleados implements ActionListener {
@@ -26,8 +25,6 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		validacion(e);
 
 		if (e.getSource() == btnEnviar) {
 
@@ -56,7 +53,7 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 				if (!cajaCargo.getText().equals("")) {
 					empleado.setCargo(cajaCargo.getText());
 				}
-				
+
 				VentanaPrincipal.empleadoDAO.setEmpleado(empleado);
 				VentanaPrincipal.empleadoDAO.setOpcion(4);
 
@@ -68,9 +65,15 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 
+		} else {
+			validacion(e);
+		}
+
+		if (e.getSource() == btnVaciar) {
+			desactivarCajas();
 		}
 
 	}

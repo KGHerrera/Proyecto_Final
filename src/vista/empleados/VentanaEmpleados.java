@@ -63,7 +63,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnVaciar = new JButton("vaciar");
 		btnBuscar = new JButton("buscar");
 		btnCancelar = new JButton("cancelar");
-		btnActualizar = new JButton("actualizar");
+		btnActualizar = new JButton("ver todos");
 
 		txtIcono = new JLabel();
 		iconEmpleado = new ImageIcon("src/iconos/altas.png");
@@ -159,7 +159,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		jp = new JScrollPane(tablaEmpleados);
 		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
 
-		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
+		Border line = BorderFactory.createLineBorder(new Color(50, 50, 50), 1);
 		jp.setBorder(line);
 		add(jp);
 
@@ -219,6 +219,21 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		cajaApellido.setEnabled(true);
 		cajaSalario.setEnabled(true);
 		cajaCargo.setEnabled(true);
+	}
+	
+	public void desactivarCajas() {
+
+		checkIdEmpleado.setSelected(false);
+		checkNombre.setSelected(false);
+		checkApellido.setSelected(false);
+		checkSalario.setSelected(false);
+		checkCargo.setSelected(false);
+
+		cajaIdEmpleado.setEnabled(false);
+		cajaNombre.setEnabled(false);
+		cajaApellido.setEnabled(false);
+		cajaSalario.setEnabled(false);
+		cajaCargo.setEnabled(false);
 	}
 
 	public void validacion(ActionEvent e) {
@@ -298,7 +313,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		} else if (e.getSource() == btnCancelar) {
 			setVisible(false);
 		} else if(e.getSource() == btnActualizar) {
-			VentanaPrincipal.empleadoDAO.getCon().actualizarTabla();
+			VentanaPrincipal.empleadoDAO.actualizarTabla();
 		}
 
 	}

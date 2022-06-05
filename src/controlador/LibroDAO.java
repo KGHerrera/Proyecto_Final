@@ -4,13 +4,11 @@ import java.sql.ResultSet;
 
 import conexion.ConexionBD;
 import modelo.Libro;
-import vista.VentanaPrincipal;
 
 public class LibroDAO implements Runnable {
 
 	private int opcion;
 	private Libro libro;
-	private ConexionBD con = VentanaPrincipal.empleadoDAO.getCon();
 	private boolean res;
 
 	public Libro getLibro() {
@@ -25,27 +23,26 @@ public class LibroDAO implements Runnable {
 		return res;
 	}
 
-	public void setRes(boolean res) {
-		this.res = res;
-	}
-
-	public ConexionBD getCon() {
-		return con;
-	}
 
 	public boolean altaLibro(Libro e) {
-		return con.altaLibro(e);
+		return ConexionBD.altaLibro(e);
 	}
 
 	public boolean bajaLibro(Libro e) {
-		return con.bajaLibro(e);
+		return ConexionBD.bajaLibro(e);
 	}
 
 	public boolean cambioLibro(Libro e) {
-		return con.cambioLibro(e);
+		return ConexionBD.cambioLibro(e);
 	}
 
-	// public void obtenerConsulta(Empleado e) { con.obtenerConsulta(e); }
+	public void obtenerConsulta(Libro e) {
+		ConexionBD.obtenerConsultaLibros(e);
+	}
+	
+	public void actualizarTabla() {
+		ConexionBD.actualizarTablaLibros();
+	}
 
 	public void consultar() {
 		if (opcion == 1)
@@ -54,7 +51,8 @@ public class LibroDAO implements Runnable {
 			bajaLibro(libro);
 		else if (opcion == 3)
 			cambioLibro(libro);
-		// else if (opcion == 4)obtenerConsulta(empleado);
+		else if (opcion == 4)
+			obtenerConsulta(libro);
 
 	}
 
@@ -67,7 +65,7 @@ public class LibroDAO implements Runnable {
 	}
 
 	public Libro buscarLibroID(Libro e) {
-		ResultSet rs = con.consultaLibro(e);
+		ResultSet rs = ConexionBD.consultaLibro(e);
 
 		if (rs != null) {
 			try {

@@ -72,6 +72,10 @@ public class BajasLibros extends VentanaLibros {
 		} else {
 			validacion(e);
 		}
+		
+		if(e.getSource() == btnVaciar) {
+			dasactivarCajas();
+		}
 
 	}
 	

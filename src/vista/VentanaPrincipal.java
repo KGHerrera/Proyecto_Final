@@ -165,10 +165,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		add(desktopPane, BorderLayout.CENTER);
 
 		setLocationRelativeTo(null);
-
-		VentanaPrincipal.empleadoDAO.getCon().actualizarTabla();
-		VentanaPrincipal.empleadoDAO.getCon().actualizarTablaLibros();
-
+		
+		empleadoDAO.actualizarTabla();
+		libroDAO.actualizarTabla();
 	}
 
 	public void esconderVentanas() {

@@ -14,6 +14,7 @@ public class CambiosEmpleados extends VentanaEmpleados {
 		txtTitulo.setText("Modificar empleado");
 		btnEnviar.setText("modificar");
 		iconEmpleado = new ImageIcon("src/iconos/cambios.png");
+		txtIcono.setIcon(iconEmpleado);
 
 		cajaIdEmpleado.setEnabled(true);
 		cajaNombre.setEnabled(true);

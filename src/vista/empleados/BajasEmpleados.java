@@ -69,6 +69,10 @@ public class BajasEmpleados extends VentanaEmpleados {
 		} else {
 			validacion(e);
 		}
+		
+		if(e.getSource() == btnVaciar) {
+			desactivarCajas();
+		}
 
 	}
 }

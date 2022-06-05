@@ -18,14 +18,15 @@ import vista.empleados.ConsultasEmpleados;
 import vista.libros.AltasLibros;
 import vista.libros.BajasLibros;
 import vista.libros.CambiosLibros;
+import vista.libros.ConsultasLibros;
 
 public class ConexionBD {
 
-	private Connection conexion = null;
-	private PreparedStatement pstm;
-	private ResultSet rs;
+	private static Connection conexion = null;
+	private static PreparedStatement pstm;
+	private static ResultSet rs;
 
-	public ConexionBD() {
+	private ConexionBD() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
@@ -42,7 +43,7 @@ public class ConexionBD {
 		}
 	}
 
-	public Connection getConexion() {
+	public static Connection getConexion() {
 		if (conexion == null) {
 			new ConexionBD();
 		}
@@ -59,7 +60,7 @@ public class ConexionBD {
 		}
 	}
 
-	public ResultSet consultarUsuario(Usuario u) {
+	public static ResultSet consultarUsuario(Usuario u) {
 		try {
 			String consulta = "select * from usuarios where usuario=? AND contrasenia=?";
 			pstm = conexion.prepareStatement(consulta);
@@ -75,7 +76,7 @@ public class ConexionBD {
 		return rs;
 	}
 
-	public boolean altaEmpleado(Empleado e) {
+	public static boolean altaEmpleado(Empleado e) {
 		try {
 
 			String filtro = "insert into empleados values (null,?,?,?,?)";
@@ -97,7 +98,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public boolean bajaEmpleado(Empleado e) {
+	public static boolean bajaEmpleado(Empleado e) {
 		try {
 			String consulta = "delete from empleados where ";
 			int pos = 1;
@@ -142,7 +143,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public boolean cambioEmpleado(Empleado e) {
+	public static boolean cambioEmpleado(Empleado e) {
 
 		try {
 			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
@@ -163,7 +164,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public void obtenerConsulta(Empleado empleado) {
+	public static void obtenerConsulta(Empleado empleado) {
 
 		ResultSetTableModel modeloDatos = null;
 		String consulta = "select * from empleados where ";
@@ -182,7 +183,7 @@ public class ConexionBD {
 
 	}
 
-	public ResultSet consultaEmpleado(Empleado e) {
+	public static ResultSet consultaEmpleado(Empleado e) {
 
 		try {
 			String consulta = "select * from empleados where id_empleado=?";
@@ -196,7 +197,7 @@ public class ConexionBD {
 		return rs;
 	}
 
-	public String generarConsultaEmpleado(Empleado e) {
+	public static String generarConsultaEmpleado(Empleado e) {
 
 		String consulta = "";
 		if (e.getIdEmpleado() != 0) {
@@ -225,7 +226,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public String generarConsultaEmpleadoModel(Empleado e) {
+	public static String generarConsultaEmpleadoModel(Empleado e) {
 
 		String consulta = "";
 		if (e.getIdEmpleado() != 0) {
@@ -254,7 +255,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public void actualizarTabla() {
+	public static void actualizarTabla() {
 		String consulta;
 		consulta = "SELECT * FROM empleados";
 
@@ -275,7 +276,7 @@ public class ConexionBD {
 		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
 	}
 
-	public boolean altaLibro(Libro e) {
+	public static boolean altaLibro(Libro e) {
 		try {
 
 			String filtro = "insert into libros values (null,?,?,?,?)";
@@ -297,7 +298,7 @@ public class ConexionBD {
 		return false;
 	}
 
-	public boolean bajaLibro(Libro e) {
+	public static boolean bajaLibro(Libro e) {
 		try {
 			String consulta = "delete from libros where ";
 			int pos = 1;
@@ -342,7 +343,7 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public boolean cambioLibro(Libro e) {
+	public static boolean cambioLibro(Libro e) {
 
 		try {
 			String consulta = "update libros set nombre=?, autor=?, stock=?, precio=? WHERE id_libro=?";
@@ -362,8 +363,27 @@ public class ConexionBD {
 		}
 		return false;
 	}
+	
+	public static void obtenerConsultaLibros(Libro libro) {
 
-	public String generarConsultaLibro(Libro e) {
+		ResultSetTableModel modeloDatos = null;
+		String consulta = "select * from libros where ";
+		consulta += generarConsultaLibroModel(libro);
+
+		try {
+			modeloDatos = new ResultSetTableModel("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/libreria",
+					consulta);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		ConsultasLibros.tablaLibros.setModel(modeloDatos);
+
+	}
+
+	public static String generarConsultaLibro(Libro e) {
 
 		String consulta = "";
 		if (e.getIdLibro() != 0) {
@@ -392,7 +412,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public void actualizarTablaLibros() {
+	public static void actualizarTablaLibros() {
 		String consulta;
 		consulta = "SELECT * FROM libros";
 
@@ -409,12 +429,12 @@ public class ConexionBD {
 
 		AltasLibros.tablaLibros.setModel(modeloDatos);
 		BajasLibros.tablaLibros.setModel(modeloDatos);
-		
 		CambiosLibros.tablaLibros.setModel(modeloDatos);
+		ConsultasLibros.tablaLibros.setModel(modeloDatos);
 
 	}
 
-	public ResultSet consultaLibro(Libro e) {
+	public static ResultSet consultaLibro(Libro e) {
 
 		try {
 			String consulta = "select * from libros where id_libro=?";
@@ -426,6 +446,35 @@ public class ConexionBD {
 			System.out.println(ex.toString());
 		}
 		return rs;
+	}
+	
+	public static String generarConsultaLibroModel(Libro e) {
+
+		String consulta = "";
+		if (e.getIdLibro() != 0) {
+			consulta += "id_libro='" + e.getIdLibro() + "' and ";
+		}
+
+		if (e.getNombre() != null) {
+			consulta += "nombre='" + e.getNombre() + "' and ";
+		}
+
+		if (e.getAutor() != null) {
+			consulta += "autor='" + e.getAutor() + "' and ";
+		}
+
+		if (e.getStock() != 0) {
+			consulta += "stock='" + e.getStock() + "' and ";
+		}
+
+		if (e.getPrecio() != 0.0) {
+			consulta += "precio='" + e.getPrecio() + "' and ";
+		}
+
+		if ((consulta.substring(consulta.length() - 4, consulta.length()).equals("and ")))
+			consulta = consulta.substring(0, consulta.length() - 4);
+
+		return consulta;
 	}
 
 }
