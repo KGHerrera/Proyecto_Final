@@ -67,7 +67,11 @@ public class BajasEmpleados extends VentanaEmpleados {
 				}
 				
 				if(VentanaPrincipal.empleadoDAO.isRes()) {
+					
+					
 					JOptionPane.showMessageDialog(null, "se elimino correctamente");
+					restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
+					desactivarCajas();
 				} else {
 					JOptionPane.showMessageDialog(null, "no se elimino");
 				}

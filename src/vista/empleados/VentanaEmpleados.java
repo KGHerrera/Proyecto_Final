@@ -32,10 +32,10 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Empleados");
 		setSize(1366 - 500, 650);
-
 		setResizable(true);
 		setVisible(true);
 		setClosable(true);
+		
 
 		JLabel txtIdEmpleado = new JLabel("id empleado: ");
 		JLabel txtNombre = new JLabel("nombre: ");
@@ -72,32 +72,32 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
 
-		txtIdEmpleado.setBounds(this.getWidth() / 4 + 90, 80, 100, 20);
-		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 20);
-		txtApellido.setBounds(this.getWidth() / 4 + 90, 160, 100, 20);
-		txtSalario.setBounds(this.getWidth() / 4 + 90, 200, 100, 20);
-		txtCargo.setBounds(this.getWidth() / 4 + 90, 240, 100, 20);
+		txtIdEmpleado.setBounds(this.getWidth() / 4 + 90, 80, 100, 25);
+		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 25);
+		txtApellido.setBounds(this.getWidth() / 4 + 90, 160, 100, 25);
+		txtSalario.setBounds(this.getWidth() / 4 + 90, 200, 100, 25);
+		txtCargo.setBounds(this.getWidth() / 4 + 90, 240, 100, 25);
 
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
-		cajaIdEmpleado.setBounds(this.getWidth() / 2, 80, 100, 20);
-		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 20);
-		cajaApellido.setBounds(this.getWidth() / 2, 160, 100, 20);
-		cajaSalario.setBounds(this.getWidth() / 2, 200, 100, 20);
-		cajaCargo.setBounds(this.getWidth() / 2, 240, 100, 20);
+		cajaIdEmpleado.setBounds(this.getWidth() / 2, 80, 100, 25);
+		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 25);
+		cajaApellido.setBounds(this.getWidth() / 2, 160, 100, 25);
+		cajaSalario.setBounds(this.getWidth() / 2, 200, 100, 25);
+		cajaCargo.setBounds(this.getWidth() / 2, 240, 100, 25);
 
-		checkIdEmpleado.setBounds(this.getWidth() / 4 + 40, 80, 20, 20);
-		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 20);
-		checkApellido.setBounds(this.getWidth() / 4 + 40, 160, 20, 20);
-		checkSalario.setBounds(this.getWidth() / 4 + 40, 200, 20, 20);
-		checkCargo.setBounds(this.getWidth() / 4 + 40, 240, 20, 20);
+		checkIdEmpleado.setBounds(this.getWidth() / 4 + 40, 80, 20, 25);
+		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 25);
+		checkApellido.setBounds(this.getWidth() / 4 + 40, 160, 20, 25);
+		checkSalario.setBounds(this.getWidth() / 4 + 40, 200, 20, 25);
+		checkCargo.setBounds(this.getWidth() / 4 + 40, 240, 20, 25);
 
-		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 20);
-		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 20);
-		
-		btnEnviar.setBounds(this.getWidth() / 2 + 140, 160, 100, 20);
-		btnVaciar.setBounds(this.getWidth() / 2 + 140, 200, 100, 20);
-		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 20);
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 25);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 25);
+
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 160, 100, 25);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 200, 100, 25);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 25);
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);
@@ -220,7 +220,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		cajaSalario.setEnabled(true);
 		cajaCargo.setEnabled(true);
 	}
-	
+
 	public void desactivarCajas() {
 
 		checkIdEmpleado.setSelected(false);
@@ -312,7 +312,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 			}
 		} else if (e.getSource() == btnCancelar) {
 			setVisible(false);
-		} else if(e.getSource() == btnActualizar) {
+		} else if (e.getSource() == btnActualizar) {
 			VentanaPrincipal.empleadoDAO.actualizarTabla();
 		}
 

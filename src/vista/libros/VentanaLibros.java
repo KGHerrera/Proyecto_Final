@@ -71,31 +71,31 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 
 		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
 
-		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 80, 100, 20);
-		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 20);
-		txtAutor.setBounds(this.getWidth() / 4 + 90, 160, 100, 20);
-		txtStock.setBounds(this.getWidth() / 4 + 90, 200, 100, 20);
-		txtPrecio.setBounds(this.getWidth() / 4 + 90, 240, 100, 20);
+		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 80, 100, 25);
+		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 25);
+		txtAutor.setBounds(this.getWidth() / 4 + 90, 160, 100, 25);
+		txtStock.setBounds(this.getWidth() / 4 + 90, 200, 100, 25);
+		txtPrecio.setBounds(this.getWidth() / 4 + 90, 240, 100, 25);
 
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
-		cajaIdLibro.setBounds(this.getWidth() / 2, 80, 100, 20);
-		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 20);
-		cajaAutor.setBounds(this.getWidth() / 2, 160, 100, 20);
-		cajaStock.setBounds(this.getWidth() / 2, 200, 100, 20);
-		cajaPrecio.setBounds(this.getWidth() / 2, 240, 100, 20);
+		cajaIdLibro.setBounds(this.getWidth() / 2, 80, 100, 25);
+		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 25);
+		cajaAutor.setBounds(this.getWidth() / 2, 160, 100, 25);
+		cajaStock.setBounds(this.getWidth() / 2, 200, 100, 25);
+		cajaPrecio.setBounds(this.getWidth() / 2, 240, 100, 25);
 
-		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 80, 20, 20);
-		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 20);
-		checkAutor.setBounds(this.getWidth() / 4 + 40, 160, 20, 20);
-		checkStock.setBounds(this.getWidth() / 4 + 40, 200, 20, 20);
-		checkPrecio.setBounds(this.getWidth() / 4 + 40, 240, 20, 20);
+		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 80, 20, 25);
+		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 25);
+		checkAutor.setBounds(this.getWidth() / 4 + 40, 160, 20, 25);
+		checkStock.setBounds(this.getWidth() / 4 + 40, 200, 20, 25);
+		checkPrecio.setBounds(this.getWidth() / 4 + 40, 240, 20, 25);
 
-		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 20);
-		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 20);
-		btnEnviar.setBounds(this.getWidth() / 2 + 140, 160, 100, 20);
-		btnVaciar.setBounds(this.getWidth() / 2 + 140, 200, 100, 20);
-		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 20);
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 25);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 25);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 200, 100, 25);
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 160, 100, 25);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 25);
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);

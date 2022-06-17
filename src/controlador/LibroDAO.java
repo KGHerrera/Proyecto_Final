@@ -4,6 +4,11 @@ import java.sql.ResultSet;
 
 import conexion.ConexionBD;
 import modelo.Libro;
+import vista.ResultSetTableModel;
+import vista.libros.AltasLibros;
+import vista.libros.BajasLibros;
+import vista.libros.CambiosLibros;
+import vista.libros.ConsultasLibros;
 
 public class LibroDAO implements Runnable {
 
@@ -43,7 +48,11 @@ public class LibroDAO implements Runnable {
 	}
 	
 	public void actualizarTabla() {
-		ConexionBD.actualizarTablaLibros();
+		ResultSetTableModel modeloDatos = ConexionBD.actualizarTablaLibros();
+		AltasLibros.tablaLibros.setModel(modeloDatos);
+		BajasLibros.tablaLibros.setModel(modeloDatos);
+		CambiosLibros.tablaLibros.setModel(modeloDatos);
+		ConsultasLibros.tablaLibros.setModel(modeloDatos);
 	}
 
 	public void consultar() {
@@ -55,6 +64,12 @@ public class LibroDAO implements Runnable {
 			cambioLibro(libro);
 		else if (opcion == 4)
 			obtenerConsulta(libro);
+		else if (opcion == 5)
+			actualizarTabla();
+		
+		if (opcion >= 1 && opcion <= 3 && res == true) {
+			actualizarTabla();
+		}
 
 	}
 

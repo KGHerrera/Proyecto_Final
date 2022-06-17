@@ -64,7 +64,11 @@ public class CambiosEmpleados extends VentanaEmpleados {
 				}
 				
 				if(VentanaPrincipal.empleadoDAO.isRes()) {
+					
+					
+					
 					JOptionPane.showMessageDialog(null, "se modifico correctamente");
+					restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 				} else {
 					JOptionPane.showMessageDialog(null, "no se modifico");
 				}

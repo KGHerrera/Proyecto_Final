@@ -13,33 +13,31 @@ import java.sql.SQLException;
 @SuppressWarnings("serial")
 public class VentanaLogin extends JFrame implements ActionListener {
 
-	GridBagLayout gbl = new GridBagLayout();
-	GridBagConstraints gbc = new GridBagConstraints();
-
 	JButton btnIniciar, btnCancelar;
 	JTextField cajaUsuario;
 	JPasswordField cajaContrasenia;
 	JLabel txtTitulo;
 
+	JPanel nPane;
 	Usuario usuario = new Usuario();
 
 	public VentanaLogin() {
-		ConexionBD.getConexion();
 
-		getContentPane().setLayout(gbl);
-		gbc.insets = new Insets(14, 20, 14, 20);
+		getContentPane().setLayout(null);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		setTitle("Iniciar sesion");
-		setSize(960, 620);
+		setSize(400, 230);
 
 		setVisible(true);
-		gbc.fill = GridBagConstraints.BOTH;
 
-		txtTitulo = new JLabel("Login");
+		txtTitulo = new JLabel("iniciar sesion");
 		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
-		txtTitulo.setForeground(new Color(7, 16, 58));
+		txtTitulo.setForeground(Color.white);
+		
+		nPane = new JPanel();
+		nPane.setBackground(new Color(52, 88, 235));
 
 		JLabel txtUsuario = new JLabel("usuario");
 		JLabel txtContrasenia = new JLabel("contraseña");
@@ -55,35 +53,42 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		btnIniciar = new JButton("iniciar");
 		btnCancelar = new JButton("cerrar");
 
-		alinearComponente(txtTitulo, 0, 0, 3, 1);
-		alinearComponente(txtUsuario, 1, 1, 1, 1);
-		alinearComponente(txtContrasenia, 1, 2, 1, 1);
+		btnCancelar.setBackground(new Color(211, 47, 47));
+		btnCancelar.setForeground(Color.white);
+		btnCancelar.setBorder(null);
+		
+		btnIniciar.setBackground(new Color(38, 179, 119));		
+		btnIniciar.setForeground(Color.white);
+		btnIniciar.setBorder(null);
 
-		alinearComponente(cajaUsuario, 2, 1, 1, 1);
-		alinearComponente(cajaContrasenia, 2, 2, 1, 1);
+		txtTitulo.setBounds(20, 15, 200, 20);
+		txtIcono.setBounds(40, 80, 64, 64);
+		txtUsuario.setBounds(130, 80, 100, 25);
+		txtContrasenia.setBounds(130, 130, 100, 25);
+		cajaUsuario.setBounds(260, 80, 100, 25);
+		cajaContrasenia.setBounds(260, 130, 100, 25);
+		btnIniciar.setBounds(130, 180, 100, 25);
+		btnCancelar.setBounds(260, 180, 100, 25);
+		
+		nPane.setBounds(0, 0, this.getWidth(), 40);
 
-		alinearComponente(btnIniciar, 2, 3, 1, 1);
-		alinearComponente(btnCancelar, 1, 3, 1, 1);
+		add(txtTitulo);
+		add(txtIcono);
+		add(txtUsuario);
+		add(txtContrasenia);
+		add(cajaUsuario);
+		add(cajaContrasenia);
 
-		alinearComponente(txtIcono, 0, 1, 1, 2);
+		add(btnCancelar);
+		add(btnIniciar);
+		
+		add(nPane);
 
 		btnIniciar.addActionListener(this);
 		btnCancelar.addActionListener(this);
-		pack();
 		setLocationRelativeTo(null);
-		
+		ConexionBD.getConexion();
 
-	}
-
-	public void alinearComponente(Component c, int x, int y, int w, int h) {
-		gbc.gridx = x;
-		gbc.gridy = y;
-
-		gbc.gridwidth = w;
-		gbc.gridheight = h;
-
-		gbl.setConstraints(c, gbc);
-		add(c);
 	}
 
 	@Override
@@ -93,19 +98,18 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		String pass = new String(arrayC);
 
 		if (e.getSource() == btnIniciar && !cajaUsuario.getText().equals("") && !pass.equals("")) {
-
 			usuario.setUsuario(cajaUsuario.getText());
 			usuario.setContrasenia(pass);
 
 			try {
 				if (ConexionBD.consultarUsuario(usuario).next()) {
+
 					new VentanaPrincipal();
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "datos erroneos");
 				}
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -113,6 +117,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		else if (e.getSource() == btnCancelar) {
 			dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "faltan datos");
 		}
 
 	}

@@ -39,7 +39,8 @@ public class AltasEmpleados extends VentanaEmpleados {
 
 		if (e.getSource() == btnEnviar) {
 			if (!cajaNombre.getText().equals("") && !cajaApellido.getText().equals("")
-					&& !cajaCargo.getText().equals("") && !cajaSalario.getText().equals("")) {
+					&& !cajaCargo.getText().equals("") && !cajaSalario.getText().equals("")
+					&& !cajaSalario.getText().equals(".")) {
 				limpiarObjeto(empleado);
 
 				empleado.setNombre(cajaNombre.getText());
@@ -59,14 +60,16 @@ public class AltasEmpleados extends VentanaEmpleados {
 					e1.printStackTrace();
 				}
 				
-				if(VentanaPrincipal.empleadoDAO.isRes()) {
+				
+
+				if (VentanaPrincipal.empleadoDAO.isRes()) {
+					
+					
 					JOptionPane.showMessageDialog(null, "se agrego correctamente");
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "no se agrego");
 				}
-				
-				
-
 				restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 
 			} else {

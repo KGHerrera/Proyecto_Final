@@ -11,13 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vista.ResultSetTableModel;
-import vista.empleados.AltasEmpleados;
-import vista.empleados.BajasEmpleados;
-import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
-import vista.libros.AltasLibros;
-import vista.libros.BajasLibros;
-import vista.libros.CambiosLibros;
 import vista.libros.ConsultasLibros;
 
 public class ConexionBD {
@@ -31,7 +25,7 @@ public class ConexionBD {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String URL = "jdbc:mysql://localhost:3306/libreria";
 			conexion = DriverManager.getConnection(URL, "root", "12345");
-
+			
 		} catch (ClassNotFoundException e) {
 
 			System.out.println("Error de DRIVER");
@@ -56,7 +50,7 @@ public class ConexionBD {
 			conexion.close();
 		} catch (SQLException e) {
 			System.out.println("Error al cerrar la conexion");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -70,13 +64,14 @@ public class ConexionBD {
 			rs = pstm.executeQuery();
 
 		} catch (Exception ex) {
-			System.out.println(ex.toString());
+			//System.out.println(ex.toString());
 		}
 
 		return rs;
 	}
 
 	public static boolean altaEmpleado(Empleado e) {
+		int res = 0;
 		try {
 
 			String filtro = "insert into empleados values (null,?,?,?,?)";
@@ -86,16 +81,16 @@ public class ConexionBD {
 			pstm.setString(2, e.getApellido());
 			pstm.setDouble(3, e.getSalario());
 			pstm.setString(4, e.getCargo());
-			pstm.executeUpdate();
-
-			actualizarTabla();
-
-			return true;
+			res = pstm.executeUpdate();		
 
 		} catch (SQLException error) {
-			error.printStackTrace();
+			res = 0;
+			//error.printStackTrace();
 		}
-		return false;
+		
+		if (res != 0) return true; 
+		else return false;
+	
 	}
 
 	public static boolean bajaEmpleado(Empleado e) {
@@ -131,20 +126,20 @@ public class ConexionBD {
 				pos++;
 			}
 
-			pstm.executeUpdate();
+			int res = pstm.executeUpdate();
 
-			actualizarTabla();
-
-			return true;
+			if (res!= 0) return true; 
+			else return false;
+			
 
 		} catch (Exception ex) {
-			System.out.println(ex.toString());
+			//System.out.println(ex.toString());
 		}
 		return false;
 	}
 
 	public static boolean cambioEmpleado(Empleado e) {
-
+		int res = 0;
 		try {
 			String consulta = "update empleados set nombre=?, apellido=?, salario=?, cargo=? WHERE id_empleado=?";
 			pstm = conexion.prepareStatement(consulta);
@@ -153,15 +148,16 @@ public class ConexionBD {
 			pstm.setDouble(3, e.getSalario());
 			pstm.setString(4, e.getCargo());
 			pstm.setInt(5, e.getIdEmpleado());
-			pstm.executeUpdate();
-
-			actualizarTabla();
-			return true;
+			
+			res = pstm.executeUpdate();
 
 		} catch (Exception ex) {
-			System.out.println(ex.toString());
+			res = 0;
+			//System.out.println(ex.toString());
 		}
-		return false;
+		
+		if (res!= 0) return true; 
+		else return false;
 	}
 
 	public static void obtenerConsulta(Empleado empleado) {
@@ -255,7 +251,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static void actualizarTabla() {
+	public static ResultSetTableModel actualizarTabla() {
 		String consulta;
 		consulta = "SELECT * FROM empleados";
 
@@ -269,11 +265,9 @@ public class ConexionBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return modeloDatos;
 
-		AltasEmpleados.tablaEmpleados.setModel(modeloDatos);
-		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
-		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
-		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
 	}
 
 	public static boolean altaLibro(Libro e) {
@@ -284,13 +278,14 @@ public class ConexionBD {
 
 			pstm.setString(1, e.getNombre());
 			pstm.setString(2, e.getAutor());
-			pstm.setDouble(3, e.getPrecio());
-			pstm.setInt(4, e.getStock());
-			pstm.executeUpdate();
+			pstm.setInt(3, e.getStock());
+			pstm.setDouble(4, e.getPrecio());
+			int res = pstm.executeUpdate();
 
 			actualizarTablaLibros();
 
-			return true;
+			if (res!= 0) return true; 
+			else return false;
 
 		} catch (SQLException error) {
 			error.printStackTrace();
@@ -331,11 +326,12 @@ public class ConexionBD {
 				pos++;
 			}
 
-			pstm.executeUpdate();
+			int res = pstm.executeUpdate();
 
 			actualizarTablaLibros();
 
-			return true;
+			if (res!= 0) return true; 
+			else return false;
 
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
@@ -353,10 +349,12 @@ public class ConexionBD {
 			pstm.setInt(3, e.getStock());
 			pstm.setDouble(4, e.getPrecio());
 			pstm.setInt(5, e.getIdLibro());
-			pstm.executeUpdate();
+			int res = pstm.executeUpdate();
 
 			actualizarTablaLibros();
-			return true;
+			
+			if (res!= 0) return true; 
+			else return false;
 
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
@@ -412,7 +410,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static void actualizarTablaLibros() {
+	public static ResultSetTableModel actualizarTablaLibros() {
 		String consulta;
 		consulta = "SELECT * FROM libros";
 
@@ -427,10 +425,7 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 
-		AltasLibros.tablaLibros.setModel(modeloDatos);
-		BajasLibros.tablaLibros.setModel(modeloDatos);
-		CambiosLibros.tablaLibros.setModel(modeloDatos);
-		ConsultasLibros.tablaLibros.setModel(modeloDatos);
+		return modeloDatos;
 
 	}
 
