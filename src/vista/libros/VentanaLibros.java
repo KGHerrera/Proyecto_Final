@@ -9,13 +9,12 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.border.Border;
 import modelo.Libro;
 import vista.VentanaPrincipal;
 
 @SuppressWarnings("serial")
 public class VentanaLibros extends JInternalFrame implements ActionListener, KeyListener {
-	
+
 	Libro libro = new Libro();
 	JTextField cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock;
 	JCheckBox checkIdLibro, checkNombre, checkAutor, checkPrecio, checkStock;
@@ -25,6 +24,8 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 	ImageIcon iconLibros;
 	JScrollPane jp;
 
+	JPanel nPane;
+
 	public VentanaLibros() {
 
 		getContentPane().setLayout(null);
@@ -32,9 +33,13 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		setTitle("Libros");
 		setSize(1366 - 500, 650);
 
-		setResizable(true);
-		setVisible(true);
+		setResizable(false);
+		setVisible(false);
 		setClosable(true);
+
+		// setBackground(Color.white);
+
+		// ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 
 		JLabel txtIdLibro = new JLabel("id libro: ");
 		JLabel txtNombre = new JLabel("nombre: ");
@@ -44,7 +49,8 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 
 		txtTitulo = new JLabel("Libros");
 
-		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
+		txtTitulo.setFont(new Font("Montserrat", Font.BOLD, 28));
+		txtTitulo.setForeground(Color.white);
 
 		cajaIdLibro = new JTextField(10);
 		cajaNombre = new JTextField(10);
@@ -59,43 +65,63 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		checkStock = new JCheckBox();
 
 		btnEnviar = new JButton("agregar");
-		btnVaciar = new JButton("limpiar");
+		btnVaciar = new JButton("vaciar");
 		btnBuscar = new JButton("buscar");
-		btnCancelar = new JButton("cancelar");
+		btnCancelar = new JButton("cerrar");
 		btnActualizar = new JButton("actualizar");
+
+		btnCancelar.setBackground(new Color(211, 47, 47));
+		btnCancelar.setForeground(Color.white);
+
+		btnEnviar.setBackground(new Color(38, 179, 119));
+		btnEnviar.setForeground(Color.white);
+
+		btnActualizar.setBackground(new Color(0, 120, 215));
+		btnActualizar.setForeground(Color.white);
+
+		btnBuscar.setBackground(new Color(0, 120, 215));
+		btnBuscar.setForeground(Color.white);
+
+		btnVaciar.setBackground(new Color(0, 120, 215));
+		btnVaciar.setForeground(Color.white);
 
 		txtIcono = new JLabel();
 		iconLibros = new ImageIcon("src/iconos/altasLibro.png");
 
 		txtIcono.setIcon(iconLibros);
 
-		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
+		nPane = new JPanel();
+		nPane.setBackground(new Color(52, 88, 235));
 
-		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 80, 100, 25);
-		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 25);
-		txtAutor.setBounds(this.getWidth() / 4 + 90, 160, 100, 25);
-		txtStock.setBounds(this.getWidth() / 4 + 90, 200, 100, 25);
-		txtPrecio.setBounds(this.getWidth() / 4 + 90, 240, 100, 25);
+		txtTitulo.setBounds(this.getWidth() / 2 - 400, 10, 300, 35);
 
-		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
+		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 90, 100, 30);
+		txtNombre.setBounds(this.getWidth() / 4 + 90, 130, 100, 30);
+		txtAutor.setBounds(this.getWidth() / 4 + 90, 170, 100, 30);
+		txtStock.setBounds(this.getWidth() / 4 + 90, 210, 100, 30);
+		txtPrecio.setBounds(this.getWidth() / 4 + 90, 250, 100, 30);
 
-		cajaIdLibro.setBounds(this.getWidth() / 2, 80, 100, 25);
-		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 25);
-		cajaAutor.setBounds(this.getWidth() / 2, 160, 100, 25);
-		cajaStock.setBounds(this.getWidth() / 2, 200, 100, 25);
-		cajaPrecio.setBounds(this.getWidth() / 2, 240, 100, 25);
+		txtIcono.setBounds(this.getWidth() / 11, 90, 160, 160);
 
-		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 80, 20, 25);
-		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 25);
-		checkAutor.setBounds(this.getWidth() / 4 + 40, 160, 20, 25);
-		checkStock.setBounds(this.getWidth() / 4 + 40, 200, 20, 25);
-		checkPrecio.setBounds(this.getWidth() / 4 + 40, 240, 20, 25);
+		cajaIdLibro.setBounds(this.getWidth() / 2, 90, 100, 30);
+		cajaNombre.setBounds(this.getWidth() / 2, 130, 100, 30);
+		cajaAutor.setBounds(this.getWidth() / 2, 170, 100, 30);
+		cajaStock.setBounds(this.getWidth() / 2, 210, 100, 30);
+		cajaPrecio.setBounds(this.getWidth() / 2, 250, 100, 30);
 
-		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 25);
-		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 25);
-		btnEnviar.setBounds(this.getWidth() / 2 + 140, 200, 100, 25);
-		btnVaciar.setBounds(this.getWidth() / 2 + 140, 160, 100, 25);
-		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 25);
+		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 90, 20, 30);
+		checkNombre.setBounds(this.getWidth() / 4 + 40, 130, 20, 30);
+		checkAutor.setBounds(this.getWidth() / 4 + 40, 170, 20, 30);
+		checkStock.setBounds(this.getWidth() / 4 + 40, 210, 20, 30);
+		checkPrecio.setBounds(this.getWidth() / 4 + 40, 250, 20, 30);
+
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 90, 100, 30);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 130, 100, 30);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 210, 100, 30);
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 170, 100, 30);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 250, 100, 30);
+
+		nPane.setBounds(0, 0, this.getWidth(), 60);
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);
@@ -147,7 +173,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		add(btnActualizar);
 		add(txtTitulo);
 
-		add(txtTitulo);
+		add(nPane);
 
 		setSize(1366 - 600, 680);
 		setLocation(getWidth() / 2 - getWidth() / 7, 0);
@@ -158,9 +184,6 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 
 		jp = new JScrollPane(tablaLibros);
 		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
-
-		Border line = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
-		jp.setBorder(line);
 		add(jp);
 
 		tablaLibros.addMouseListener(new MouseAdapter() {
@@ -201,7 +224,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		cajaStock.setEnabled(true);
 		cajaPrecio.setEnabled(true);
 	}
-	
+
 	public void dasactivarCajas() {
 
 		checkIdLibro.setSelected(false);
@@ -227,9 +250,9 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 				((JCheckBox) c).setSelected(false);
 		}
 	}
-	
+
 	public void validacion(ActionEvent e) {
-		
+
 		if (e.getSource() == btnBuscar) {
 
 			if (!cajaIdLibro.getText().equals("")) {
@@ -254,7 +277,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 			}
 
 		}
-		
+
 		else if (e.getSource() == btnVaciar) {
 			restablecerComponentes(cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock);
 		}
@@ -303,16 +326,16 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 				cajaStock.setText("");
 			}
 		}
-		
+
 		else if (e.getSource() == btnCancelar) {
 			setVisible(false);
-		} 
-		
-		else if(e.getSource() == btnActualizar) {
+		}
+
+		else if (e.getSource() == btnActualizar) {
 			VentanaPrincipal.libroDAO.actualizarTabla();
 		}
 	}
-	
+
 	public void limpiarObjeto(Libro e) {
 		e.setIdLibro(0);
 		e.setNombre(null);
@@ -339,7 +362,7 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 		} else if (((e.getKeyChar() < '0') || (e.getKeyChar() > '9')) && (e.getKeyChar() != KeyEvent.VK_BACK_SPACE)
 				&& (e.getKeyChar() != '.' || cajaPrecio.getText().contains("."))) {
 			e.consume();
-		} 
+		}
 
 	}
 

@@ -25,7 +25,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			itemCambiosVentas, itemConsultasVentas;
 
 	JDesktopPane desktopPane;
-	
+
 	public static EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 	public static LibroDAO libroDAO = new LibroDAO();
 
@@ -39,11 +39,19 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		setVisible(true);
 
+		setIconImage(null);
+		
 		JMenuBar menuBar = new JMenuBar();
 
 		JMenu menuEmpleados = new JMenu("Empleado");
 		JMenu menuLibros = new JMenu("Libro");
 		JMenu menuVentas = new JMenu("Venta");
+
+		/*
+		 * menuEmpleados.setForeground(Color.white);
+		 * menuLibros.setForeground(Color.white); menuVentas.setForeground(Color.white);
+		 */
+
 		Dimension d1 = new Dimension(90, 25);
 		Dimension d2 = new Dimension(87, 25);
 
@@ -165,7 +173,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		add(desktopPane, BorderLayout.CENTER);
 
 		setLocationRelativeTo(null);
-		
+
 		empleadoDAO.actualizarTabla();
 		libroDAO.actualizarTabla();
 	}

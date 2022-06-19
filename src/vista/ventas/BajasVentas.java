@@ -1,5 +1,6 @@
 package vista.ventas;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 
 
@@ -11,5 +12,9 @@ public class BajasVentas extends VentanaVentas{
 		btnEnviar.setText("eliminar");
 		iconVentas = new ImageIcon("src/iconos/bajasVenta.png");
 		txtIcono.setIcon(iconVentas);
+		
+		btnActualizar.setVisible(false);
+		
+		nPane.setBackground(new Color(247, 62, 62));
 	}
 }

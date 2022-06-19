@@ -1,7 +1,7 @@
 package vista.empleados;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -28,6 +28,9 @@ public class AltasEmpleados extends VentanaEmpleados {
 
 		btnBuscar.setVisible(false);
 		btnActualizar.setVisible(false);
+		
+		nPane.setBackground(new Color(38, 179, 119));
+		btnEnviar.setBackground(nPane.getBackground());
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "s");
@@ -59,14 +62,11 @@ public class AltasEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				
 
 				if (VentanaPrincipal.empleadoDAO.isRes()) {
-					
-					
+
 					JOptionPane.showMessageDialog(null, "se agrego correctamente");
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "no se agrego");
 				}

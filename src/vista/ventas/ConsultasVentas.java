@@ -1,5 +1,4 @@
 package vista.ventas;
-
 import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
@@ -9,5 +8,8 @@ public class ConsultasVentas extends VentanaVentas{
 		btnEnviar.setText("buscar");
 		iconVentas = new ImageIcon("src/iconos/consultasVenta.png");
 		txtIcono.setIcon(iconVentas);
+		
+		btnActualizar.setVisible(true);
+		btnActualizar.setText("ver todos");
 	}
 }

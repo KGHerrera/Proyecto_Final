@@ -11,7 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vista.ResultSetTableModel;
+import vista.empleados.AltasEmpleados;
+import vista.empleados.BajasEmpleados;
+import vista.empleados.CambiosEmpleados;
 import vista.empleados.ConsultasEmpleados;
+import vista.libros.AltasLibros;
+import vista.libros.BajasLibros;
+import vista.libros.CambiosLibros;
 import vista.libros.ConsultasLibros;
 
 public class ConexionBD {
@@ -251,7 +257,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static ResultSetTableModel actualizarTabla() {
+	public static void actualizarTabla() {
 		String consulta;
 		consulta = "SELECT * FROM empleados";
 
@@ -266,7 +272,10 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 		
-		return modeloDatos;
+		AltasEmpleados.tablaEmpleados.setModel(modeloDatos);
+		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
+		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
+		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
 
 	}
 
@@ -410,7 +419,7 @@ public class ConexionBD {
 		return consulta;
 	}
 
-	public static ResultSetTableModel actualizarTablaLibros() {
+	public static void actualizarTablaLibros() {
 		String consulta;
 		consulta = "SELECT * FROM libros";
 
@@ -424,8 +433,11 @@ public class ConexionBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return modeloDatos;
+		
+		AltasLibros.tablaLibros.setModel(modeloDatos);
+		BajasLibros.tablaLibros.setModel(modeloDatos);
+		CambiosLibros.tablaLibros.setModel(modeloDatos);
+		ConsultasLibros.tablaLibros.setModel(modeloDatos);
 
 	}
 

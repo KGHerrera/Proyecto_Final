@@ -1,6 +1,8 @@
 package vista.empleados;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -30,6 +32,9 @@ public class CambiosEmpleados extends VentanaEmpleados {
 		checkCargo.setVisible(false);
 
 		btnActualizar.setVisible(false);
+
+		nPane.setBackground(new Color(240, 152, 46));
+		btnEnviar.setBackground(nPane.getBackground());
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "n");
@@ -62,11 +67,9 @@ public class CambiosEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				if(VentanaPrincipal.empleadoDAO.isRes()) {
-					
-					
-					
+
+				if (VentanaPrincipal.empleadoDAO.isRes()) {
+
 					JOptionPane.showMessageDialog(null, "se modifico correctamente");
 					restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 				} else {

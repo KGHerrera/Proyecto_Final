@@ -4,11 +4,6 @@ import java.sql.ResultSet;
 
 import conexion.ConexionBD;
 import modelo.Libro;
-import vista.ResultSetTableModel;
-import vista.libros.AltasLibros;
-import vista.libros.BajasLibros;
-import vista.libros.CambiosLibros;
-import vista.libros.ConsultasLibros;
 
 public class LibroDAO implements Runnable {
 
@@ -28,31 +23,32 @@ public class LibroDAO implements Runnable {
 		return res;
 	}
 
-
 	public boolean altaLibro(Libro e) {
+		ConexionBD.getConexion();
 		res = ConexionBD.altaLibro(e);
 		return res;
 	}
 
 	public boolean bajaLibro(Libro e) {
+		ConexionBD.getConexion();
 		return ConexionBD.bajaLibro(e);
 	}
 
 	public boolean cambioLibro(Libro e) {
+		ConexionBD.getConexion();
 		res = ConexionBD.cambioLibro(e);
 		return res;
 	}
 
 	public void obtenerConsulta(Libro e) {
+		ConexionBD.getConexion();
 		ConexionBD.obtenerConsultaLibros(e);
 	}
-	
+
 	public void actualizarTabla() {
-		ResultSetTableModel modeloDatos = ConexionBD.actualizarTablaLibros();
-		AltasLibros.tablaLibros.setModel(modeloDatos);
-		BajasLibros.tablaLibros.setModel(modeloDatos);
-		CambiosLibros.tablaLibros.setModel(modeloDatos);
-		ConsultasLibros.tablaLibros.setModel(modeloDatos);
+		ConexionBD.getConexion();
+		ConexionBD.actualizarTablaLibros();
+
 	}
 
 	public void consultar() {
@@ -66,7 +62,7 @@ public class LibroDAO implements Runnable {
 			obtenerConsulta(libro);
 		else if (opcion == 5)
 			actualizarTabla();
-		
+
 		if (opcion >= 1 && opcion <= 3 && res == true) {
 			actualizarTabla();
 		}

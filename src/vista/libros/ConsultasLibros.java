@@ -1,7 +1,6 @@
 package vista.libros;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
@@ -22,6 +21,8 @@ public class ConsultasLibros extends VentanaLibros {
 		
 		tablaLibros = new JTable();
 		configurarTabla(tablaLibros, "n");
+		
+		btnEnviar.setBackground(nPane.getBackground());
 	}
 	
 	@Override

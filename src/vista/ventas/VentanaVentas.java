@@ -15,20 +15,24 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 	JTextField cajaIdVentas, cajaCantidadLibros, cajaTotalPagar, cajaIdLibro, cajaIdEmpleado;
 	JTable tablaVentas;
 	JCheckBox checkIdVenta, checkCantidadLibros, checkTotalPagar, checkIdLibro, checkIdEmpleado;
-	JButton btnEnviar, btnVaciar;
+	JButton btnEnviar, btnVaciar, btnBuscar, btnCancelar, btnActualizar;
 
 	JLabel txtTitulo, txtIcono;
 	ImageIcon iconVentas;
 
+	JPanel nPane;
 	public VentanaVentas() {
 
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Libros");
 		setSize(1366 - 500, 650);
+		//setBackground(Color.white);
 		
-		setResizable(true);
-		setVisible(true);
+		//((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		
+		setResizable(false);
+		setVisible(false);
 		setClosable(true);
 
 		JLabel txtIdVenta = new JLabel("id venta: ");
@@ -39,7 +43,8 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 
 		txtTitulo = new JLabel("Ventas");
 
-		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
+		txtTitulo.setFont(new Font("Montserrat", Font.BOLD, 28));
+		txtTitulo.setForeground(Color.white);
 
 		cajaIdVentas = new JTextField(10);
 		cajaCantidadLibros = new JTextField(10);
@@ -53,38 +58,68 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 		checkIdLibro = new JCheckBox();
 		checkIdEmpleado = new JCheckBox();
 
-		btnEnviar = new JButton("enviar");
+		btnEnviar = new JButton("agregar");
 		btnVaciar = new JButton("vaciar");
+		btnBuscar = new JButton("buscar");
+		btnCancelar = new JButton("cerrar");
+		btnActualizar = new JButton("ver todos");
+		
+		btnCancelar.setBackground(new Color(211, 47, 47));
+		btnCancelar.setForeground(Color.white);
+		
+		btnEnviar.setBackground(new Color(38, 179, 119));		
+		btnEnviar.setForeground(Color.white);
+		
+		btnActualizar.setBackground(new Color(0, 120, 215));		
+		btnActualizar.setForeground(Color.white);
+		
+		btnBuscar.setBackground(new Color(0, 120, 215));		
+		btnBuscar.setForeground(Color.white);
+		
+		btnVaciar.setBackground(new Color(0, 120, 215));		
+		btnVaciar.setForeground(Color.white);
 		
 		txtIcono = new JLabel();
 		iconVentas = new ImageIcon("src/iconos/altasVenta.png");
 		
 		txtIcono.setIcon(iconVentas);
+		
+		nPane = new JPanel();
+		nPane.setBackground(new Color(52, 88, 235));
 
-		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
+		txtTitulo.setBounds(this.getWidth() / 2 - 400, 10, 300, 35);
+		
+		txtIdVenta.setBounds(this.getWidth() / 4 + 90, 90, 100, 25);
+		txtCantidadLibros.setBounds(this.getWidth() / 4 + 90, 130, 100, 30);
+		txtTotalPagar.setBounds(this.getWidth() / 4 + 90, 170, 100, 30);
+		txtIdLibro.setBounds(this.getWidth() / 4 + 90, 210, 100, 30);
+		txtIdEmpleado.setBounds(this.getWidth() / 4 + 90, 250, 100, 30);
 
-		txtIdVenta.setBounds(this.getWidth() / 3, 80, 100, 20);
-		txtCantidadLibros.setBounds(this.getWidth() / 3, 120, 100, 20);
-		txtTotalPagar.setBounds(this.getWidth() / 3, 160, 100, 20);
-		txtIdLibro.setBounds(this.getWidth() / 3, 200, 100, 20);
-		txtIdEmpleado.setBounds(this.getWidth() / 3, 240, 100, 20);
 		
 		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
 
-		cajaIdVentas.setBounds(this.getWidth() / 2 + 70, 80, 100, 20);
-		cajaCantidadLibros.setBounds(this.getWidth() / 2 + 70, 120, 100, 20);
-		cajaTotalPagar.setBounds(this.getWidth() / 2 + 70, 160, 100, 20);
-		cajaIdLibro.setBounds(this.getWidth() / 2 + 70, 200, 100, 20);
-		cajaIdEmpleado.setBounds(this.getWidth() / 2 + 70, 240, 100, 20);
+		txtIcono.setBounds(this.getWidth() / 11, 90, 160, 160);
 
-		checkIdVenta.setBounds(this.getWidth() / 2 + 220, 80, 100, 20);
-		checkCantidadLibros.setBounds(this.getWidth() / 2 + 220, 120, 100, 20);
-		checkTotalPagar.setBounds(this.getWidth() / 2 + 220, 160, 100, 20);
-		checkIdLibro.setBounds(this.getWidth() / 2 + 220, 200, 100, 20);
-		checkIdEmpleado.setBounds(this.getWidth() / 2 + 220, 240, 100, 20);
+		cajaIdVentas.setBounds(this.getWidth() / 2, 90, 100, 30);
+		cajaCantidadLibros.setBounds(this.getWidth() / 2, 130, 100, 30);
+		cajaTotalPagar.setBounds(this.getWidth() / 2, 170, 100, 30);
+		cajaIdLibro.setBounds(this.getWidth() / 2, 210, 100, 30);
+		cajaIdEmpleado.setBounds(this.getWidth() / 2, 250, 100, 30);
 
-		btnEnviar.setBounds(this.getWidth() / 2 + 70, 280, 100, 20);
-		btnVaciar.setBounds(this.getWidth() / 3, 280, 100, 20);
+		checkIdVenta.setBounds(this.getWidth() / 4 + 40, 90, 20, 30);
+		checkCantidadLibros.setBounds(this.getWidth() / 4 + 40, 130, 20, 30);
+		checkTotalPagar.setBounds(this.getWidth() / 4 + 40, 170, 20, 30);
+		checkIdLibro.setBounds(this.getWidth() / 4 + 40, 210, 20, 30);
+		checkIdEmpleado.setBounds(this.getWidth() / 4 + 40, 250, 20, 30);
+
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 90, 100, 30);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 130, 100, 30);
+
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 170, 100, 30);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 210, 100, 30);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 250, 100, 30);
+
+		nPane.setBounds(0, 0, this.getWidth(), 60);
 
 		tablaVentas = new JTable();
 		tablaVentas.setBounds(this.getWidth() / 12, 320, 630, 270);
@@ -133,10 +168,15 @@ public class VentanaVentas extends JInternalFrame implements ActionListener, Key
 
 		add(btnVaciar);
 		add(btnEnviar);
+		add(btnCancelar);
+		add(btnBuscar);
+		add(btnActualizar);
 
 		add(txtTitulo);
 
 		add(tablaVentas);
+		
+		add(nPane);
 		
 		setSize(1366 - 600, 680);
 		setLocation(getWidth()/2 - getWidth()/7, 0);

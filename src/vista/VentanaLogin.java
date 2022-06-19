@@ -19,9 +19,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	JLabel txtTitulo;
 
 	JPanel nPane;
-	Usuario usuario = new Usuario();
+	Usuario usuario;
 
 	public VentanaLogin() {
+
+		usuario = new Usuario();
 
 		getContentPane().setLayout(null);
 
@@ -35,7 +37,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		txtTitulo = new JLabel("iniciar sesion");
 		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
 		txtTitulo.setForeground(Color.white);
-		
+
 		nPane = new JPanel();
 		nPane.setBackground(new Color(52, 88, 235));
 
@@ -56,8 +58,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		btnCancelar.setBackground(new Color(211, 47, 47));
 		btnCancelar.setForeground(Color.white);
 		btnCancelar.setBorder(null);
-		
-		btnIniciar.setBackground(new Color(38, 179, 119));		
+
+		btnIniciar.setBackground(new Color(38, 179, 119));
 		btnIniciar.setForeground(Color.white);
 		btnIniciar.setBorder(null);
 
@@ -69,7 +71,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		cajaContrasenia.setBounds(260, 130, 100, 25);
 		btnIniciar.setBounds(130, 180, 100, 25);
 		btnCancelar.setBounds(260, 180, 100, 25);
-		
+
 		nPane.setBounds(0, 0, this.getWidth(), 40);
 
 		add(txtTitulo);
@@ -81,7 +83,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		add(btnCancelar);
 		add(btnIniciar);
-		
+
 		add(nPane);
 
 		btnIniciar.addActionListener(this);
@@ -101,8 +103,21 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			usuario.setUsuario(cajaUsuario.getText());
 			usuario.setContrasenia(pass);
 
+			ConexionBD.getConexion();
+
 			try {
 				if (ConexionBD.consultarUsuario(usuario).next()) {
+
+					try {
+
+						JFrame.setDefaultLookAndFeelDecorated(true);
+						JDialog.setDefaultLookAndFeelDecorated(true);
+						// javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+						javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+					} catch (Exception ex) {
+
+					}
 
 					new VentanaPrincipal();
 					dispose();

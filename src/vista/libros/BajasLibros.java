@@ -1,37 +1,37 @@
 package vista.libros;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
 
-
 @SuppressWarnings("serial")
 public class BajasLibros extends VentanaLibros {
 	public static JTable tablaLibros;
-	
+
 	public BajasLibros() {
 		txtTitulo.setText("Eliminar libro");
 		btnEnviar.setText("eliminar");
 		iconLibros = new ImageIcon("src/iconos/bajasLibro.png");
 		txtIcono.setIcon(iconLibros);
-		
+
 		btnActualizar.setVisible(false);
+		nPane.setBackground(new Color(247, 62, 62));
+		btnEnviar.setBackground(nPane.getBackground());
 		
 		BajasLibros.tablaLibros = new JTable();
 		configurarTabla(BajasLibros.tablaLibros, "n");
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnEnviar) {
-			if (!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("")
-					|| !cajaAutor.getText().equals("") || !cajaPrecio.getText().equals("")
-					|| !cajaStock.getText().equals("")) {
+			if (!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("") || !cajaAutor.getText().equals("")
+					|| !cajaPrecio.getText().equals("") || !cajaStock.getText().equals("")) {
 
 				limpiarObjeto(libro);
 
@@ -54,8 +54,7 @@ public class BajasLibros extends VentanaLibros {
 				if (!cajaStock.getText().equals("")) {
 					libro.setStock(Integer.parseInt(cajaStock.getText()));
 				}
-				
-				
+
 				VentanaPrincipal.libroDAO.setLibro(libro);
 				VentanaPrincipal.libroDAO.setOpcion(2);
 
@@ -67,8 +66,8 @@ public class BajasLibros extends VentanaLibros {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				if(VentanaPrincipal.libroDAO.isRes()) {
+
+				if (VentanaPrincipal.libroDAO.isRes()) {
 					JOptionPane.showMessageDialog(null, "se elimino correctamente");
 				} else {
 					JOptionPane.showMessageDialog(null, "no se elimino");
@@ -79,13 +78,11 @@ public class BajasLibros extends VentanaLibros {
 		} else {
 			validacion(e);
 		}
-		
-		if(e.getSource() == btnVaciar) {
+
+		if (e.getSource() == btnVaciar) {
 			dasactivarCajas();
 		}
 
 	}
-	
-	
 
 }

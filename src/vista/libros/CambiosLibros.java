@@ -1,7 +1,7 @@
 package vista.libros;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -32,7 +32,9 @@ public class CambiosLibros extends VentanaLibros {
 		checkPrecio.setVisible(false);
 
 		btnActualizar.setVisible(false);
-
+		nPane.setBackground(new Color(240, 152, 46));
+		btnEnviar.setBackground(nPane.getBackground());
+		
 		tablaLibros = new JTable();
 		configurarTabla(tablaLibros, "n");
 	}
@@ -62,8 +64,8 @@ public class CambiosLibros extends VentanaLibros {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				if(VentanaPrincipal.libroDAO.isRes()) {
+
+				if (VentanaPrincipal.libroDAO.isRes()) {
 					JOptionPane.showMessageDialog(null, "se modifico correctamente");
 				} else {
 					JOptionPane.showMessageDialog(null, "no se modifico");

@@ -1,7 +1,7 @@
 package vista.libros;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -13,7 +13,7 @@ public class AltasLibros extends VentanaLibros {
 	public static JTable tablaLibros;
 
 	public AltasLibros() {
-		
+
 		btnBuscar.setVisible(false);
 		btnActualizar.setVisible(false);
 
@@ -28,6 +28,10 @@ public class AltasLibros extends VentanaLibros {
 		checkAutor.setVisible(false);
 		checkPrecio.setVisible(false);
 		checkStock.setVisible(false);
+
+		nPane.setBackground(new Color(38, 179, 119));
+		btnEnviar.setBackground(nPane.getBackground());
+		
 		tablaLibros = new JTable();
 		configurarTabla(tablaLibros, "s");
 	}
@@ -38,7 +42,7 @@ public class AltasLibros extends VentanaLibros {
 		if (e.getSource() == btnEnviar) {
 			if (!cajaNombre.getText().equals("") && !cajaAutor.getText().equals("") && !cajaPrecio.getText().equals("")
 					&& !cajaStock.getText().equals("")) {
-				
+
 				limpiarObjeto(libro);
 
 				libro.setNombre(cajaNombre.getText());
@@ -57,13 +61,13 @@ public class AltasLibros extends VentanaLibros {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				if(VentanaPrincipal.libroDAO.isRes()) {
+
+				if (VentanaPrincipal.libroDAO.isRes()) {
 					JOptionPane.showMessageDialog(null, "se agrego correctamente");
 				} else {
 					JOptionPane.showMessageDialog(null, "no se agrego");
 				}
-				
+
 				restablecerComponentes(cajaIdLibro, cajaNombre, cajaAutor, cajaPrecio, cajaStock);
 
 			} else {

@@ -3,6 +3,7 @@ package vista.empleados;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -20,6 +21,8 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "n");
+		
+		btnEnviar.setBackground(nPane.getBackground());
 
 	}
 
@@ -66,6 +69,8 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 					e1.printStackTrace();
 				}
 
+			} else {
+				JOptionPane.showMessageDialog(null, "faltan datos");
 			}
 
 		} else {

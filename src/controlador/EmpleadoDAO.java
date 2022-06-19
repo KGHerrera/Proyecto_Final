@@ -4,11 +4,6 @@ import java.sql.ResultSet;
 
 import conexion.ConexionBD;
 import modelo.Empleado;
-import vista.ResultSetTableModel;
-import vista.empleados.AltasEmpleados;
-import vista.empleados.BajasEmpleados;
-import vista.empleados.CambiosEmpleados;
-import vista.empleados.ConsultasEmpleados;
 
 public class EmpleadoDAO implements Runnable {
 
@@ -21,25 +16,25 @@ public class EmpleadoDAO implements Runnable {
 	}
 
 	public boolean altaEmpleado(Empleado e) {
-		
+		ConexionBD.getConexion();
 		res = ConexionBD.altaEmpleado(e);
 		return res;
 	}
 
 	public boolean bajaEmpleado(Empleado e) {
-		
+		ConexionBD.getConexion();
 		res = ConexionBD.bajaEmpleado(e);
 		return res;
 	}
 
 	public boolean cambioEmpleado(Empleado e) {
-	
+		ConexionBD.getConexion();
 		res = ConexionBD.cambioEmpleado(e);
 		return res;
 	}
 
 	public void obtenerConsulta(Empleado e) {
-	
+		ConexionBD.getConexion();
 		ConexionBD.obtenerConsulta(e);
 	}
 
@@ -52,8 +47,7 @@ public class EmpleadoDAO implements Runnable {
 			cambioEmpleado(empleado);
 		else if (opcion == 4)
 			obtenerConsulta(empleado);
-	
-		
+
 		else if (opcion == 5)
 			actualizarTabla();
 
@@ -80,11 +74,8 @@ public class EmpleadoDAO implements Runnable {
 	}
 
 	public void actualizarTabla() {
-		ResultSetTableModel modeloDatos = ConexionBD.actualizarTabla();
-		AltasEmpleados.tablaEmpleados.setModel(modeloDatos);
-		ConsultasEmpleados.tablaEmpleados.setModel(modeloDatos);
-		CambiosEmpleados.tablaEmpleados.setModel(modeloDatos);
-		BajasEmpleados.tablaEmpleados.setModel(modeloDatos);
+		ConexionBD.getConexion();
+		ConexionBD.actualizarTabla();
 
 	}
 

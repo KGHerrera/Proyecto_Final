@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.border.Border;
 import modelo.Empleado;
 import vista.VentanaPrincipal;
 
@@ -25,6 +24,7 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	JLabel txtTitulo, txtIcono;
 	ImageIcon iconEmpleado;
 	JScrollPane jp;
+	JPanel nPane;
 
 	public VentanaEmpleados() {
 
@@ -32,10 +32,14 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Empleados");
 		setSize(1366 - 500, 650);
-		setResizable(true);
-		setVisible(true);
+
+		setResizable(false);
+		setVisible(false);
 		setClosable(true);
-		
+
+		// setBackground(Color.white);
+
+		// ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 
 		JLabel txtIdEmpleado = new JLabel("id empleado: ");
 		JLabel txtNombre = new JLabel("nombre: ");
@@ -45,7 +49,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 
 		txtTitulo = new JLabel("Empleados");
 
-		txtTitulo.setFont(new Font("calibri", Font.BOLD, 20));
+		txtTitulo.setFont(new Font("Montserrat", Font.BOLD, 28));
+		txtTitulo.setForeground(Color.white);
 
 		cajaIdEmpleado = new JTextField(10);
 		cajaNombre = new JTextField(10);
@@ -62,42 +67,61 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		btnEnviar = new JButton("agregar");
 		btnVaciar = new JButton("vaciar");
 		btnBuscar = new JButton("buscar");
-		btnCancelar = new JButton("cancelar");
+		btnCancelar = new JButton("cerrar");
 		btnActualizar = new JButton("ver todos");
+
+		btnCancelar.setBackground(new Color(211, 47, 47));
+		btnCancelar.setForeground(Color.white);
+
+		btnEnviar.setBackground(new Color(38, 179, 119));
+		btnEnviar.setForeground(Color.white);
+
+		btnActualizar.setBackground(new Color(0, 120, 215));
+		btnActualizar.setForeground(Color.white);
+
+		btnBuscar.setBackground(new Color(0, 120, 215));
+		btnBuscar.setForeground(Color.white);
+
+		btnVaciar.setBackground(new Color(0, 120, 215));
+		btnVaciar.setForeground(Color.white);
 
 		txtIcono = new JLabel();
 		iconEmpleado = new ImageIcon("src/iconos/altas.png");
 
 		txtIcono.setIcon(iconEmpleado);
 
-		txtTitulo.setBounds(this.getWidth() / 12, 40, 300, 20);
+		nPane = new JPanel();
+		nPane.setBackground(new Color(52, 88, 235));
 
-		txtIdEmpleado.setBounds(this.getWidth() / 4 + 90, 80, 100, 25);
-		txtNombre.setBounds(this.getWidth() / 4 + 90, 120, 100, 25);
-		txtApellido.setBounds(this.getWidth() / 4 + 90, 160, 100, 25);
-		txtSalario.setBounds(this.getWidth() / 4 + 90, 200, 100, 25);
-		txtCargo.setBounds(this.getWidth() / 4 + 90, 240, 100, 25);
+		txtTitulo.setBounds(this.getWidth() / 2 - 400, 10, 300, 35);
 
-		txtIcono.setBounds(this.getWidth() / 11, 80, 160, 160);
+		txtIdEmpleado.setBounds(this.getWidth() / 4 + 90, 90, 100, 30);
+		txtNombre.setBounds(this.getWidth() / 4 + 90, 130, 100, 30);
+		txtApellido.setBounds(this.getWidth() / 4 + 90, 170, 100, 30);
+		txtSalario.setBounds(this.getWidth() / 4 + 90, 210, 100, 30);
+		txtCargo.setBounds(this.getWidth() / 4 + 90, 250, 100, 30);
 
-		cajaIdEmpleado.setBounds(this.getWidth() / 2, 80, 100, 25);
-		cajaNombre.setBounds(this.getWidth() / 2, 120, 100, 25);
-		cajaApellido.setBounds(this.getWidth() / 2, 160, 100, 25);
-		cajaSalario.setBounds(this.getWidth() / 2, 200, 100, 25);
-		cajaCargo.setBounds(this.getWidth() / 2, 240, 100, 25);
+		txtIcono.setBounds(this.getWidth() / 11, 90, 160, 160);
 
-		checkIdEmpleado.setBounds(this.getWidth() / 4 + 40, 80, 20, 25);
-		checkNombre.setBounds(this.getWidth() / 4 + 40, 120, 20, 25);
-		checkApellido.setBounds(this.getWidth() / 4 + 40, 160, 20, 25);
-		checkSalario.setBounds(this.getWidth() / 4 + 40, 200, 20, 25);
-		checkCargo.setBounds(this.getWidth() / 4 + 40, 240, 20, 25);
+		cajaIdEmpleado.setBounds(this.getWidth() / 2, 90, 100, 30);
+		cajaNombre.setBounds(this.getWidth() / 2, 130, 100, 30);
+		cajaApellido.setBounds(this.getWidth() / 2, 170, 100, 30);
+		cajaSalario.setBounds(this.getWidth() / 2, 210, 100, 30);
+		cajaCargo.setBounds(this.getWidth() / 2, 250, 100, 30);
 
-		btnBuscar.setBounds(this.getWidth() / 2 + 140, 80, 100, 25);
-		btnActualizar.setBounds(this.getWidth() / 2 + 140, 120, 100, 25);
+		checkIdEmpleado.setBounds(this.getWidth() / 4 + 40, 90, 20, 30);
+		checkNombre.setBounds(this.getWidth() / 4 + 40, 130, 20, 30);
+		checkApellido.setBounds(this.getWidth() / 4 + 40, 170, 20, 30);
+		checkSalario.setBounds(this.getWidth() / 4 + 40, 210, 20, 30);
+		checkCargo.setBounds(this.getWidth() / 4 + 40, 250, 20, 30);
 
-		btnVaciar.setBounds(this.getWidth() / 2 + 140, 160, 100, 25);
-		btnEnviar.setBounds(this.getWidth() / 2 + 140, 200, 100, 25);
-		btnCancelar.setBounds(this.getWidth() / 2 + 140, 240, 100, 25);
+		btnBuscar.setBounds(this.getWidth() / 2 + 140, 90, 100, 30);
+		btnActualizar.setBounds(this.getWidth() / 2 + 140, 130, 100, 30);
+		btnVaciar.setBounds(this.getWidth() / 2 + 140, 170, 100, 30);
+		btnEnviar.setBounds(this.getWidth() / 2 + 140, 210, 100, 30);
+		btnCancelar.setBounds(this.getWidth() / 2 + 140, 250, 100, 30);
+
+		nPane.setBounds(0, 0, this.getWidth(), 60);
 
 		btnVaciar.addActionListener(this);
 		btnEnviar.addActionListener(this);
@@ -149,6 +173,8 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		add(btnActualizar);
 		add(txtTitulo);
 
+		add(nPane);
+
 		setSize(1366 - 600, 680);
 		setLocation(getWidth() / 2 - getWidth() / 7, 0);
 
@@ -159,8 +185,12 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		jp = new JScrollPane(tablaEmpleados);
 		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
 
-		Border line = BorderFactory.createLineBorder(new Color(50, 50, 50), 1);
-		jp.setBorder(line);
+
+		/*
+		 * Border line = BorderFactory.createLineBorder(nPane.getBackground(), 2);
+		 * jp.setBorder(line);
+		 */
+		
 		add(jp);
 
 		tablaEmpleados.addMouseListener(new MouseAdapter() {

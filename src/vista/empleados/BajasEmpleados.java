@@ -1,6 +1,8 @@
 package vista.empleados;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,9 +21,12 @@ public class BajasEmpleados extends VentanaEmpleados {
 		txtIcono.setIcon(iconEmpleado);
 		btnActualizar.setVisible(false);
 
+		nPane.setBackground(new Color(247, 62, 62));
+		
+		btnEnviar.setBackground(nPane.getBackground());
+
 		BajasEmpleados.tablaEmpleados = new JTable();
 		configurarTabla(BajasEmpleados.tablaEmpleados, "n");
-
 	}
 
 	@Override
@@ -65,10 +70,9 @@ public class BajasEmpleados extends VentanaEmpleados {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				
-				if(VentanaPrincipal.empleadoDAO.isRes()) {
-					
-					
+
+				if (VentanaPrincipal.empleadoDAO.isRes()) {
+
 					JOptionPane.showMessageDialog(null, "se elimino correctamente");
 					restablecerComponentes(cajaIdEmpleado, cajaNombre, cajaApellido, cajaSalario, cajaCargo);
 					desactivarCajas();
@@ -82,8 +86,8 @@ public class BajasEmpleados extends VentanaEmpleados {
 		} else {
 			validacion(e);
 		}
-		
-		if(e.getSource() == btnVaciar) {
+
+		if (e.getSource() == btnVaciar) {
 			desactivarCajas();
 		}
 
