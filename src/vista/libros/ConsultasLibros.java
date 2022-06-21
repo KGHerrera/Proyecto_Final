@@ -2,6 +2,7 @@ package vista.libros;
 
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import vista.VentanaPrincipal;
@@ -31,9 +32,9 @@ public class ConsultasLibros extends VentanaLibros {
 
 		if (e.getSource() == btnEnviar) {
 
-			if (!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("")
+			if ((!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("")
 					|| !cajaAutor.getText().equals("") || !cajaPrecio.getText().equals("")
-					|| !cajaStock.getText().equals("")) {
+					|| !cajaStock.getText().equals("")) && !cajaPrecio.getText().equals(".")) {
 
 				limpiarObjeto(libro);
 
@@ -51,7 +52,7 @@ public class ConsultasLibros extends VentanaLibros {
 
 				if (!cajaPrecio.getText().equals("")) {
 					libro.setPrecio(Double.parseDouble(cajaPrecio.getText()));
-				}
+				} 
 
 				if (!cajaStock.getText().equals("")) {
 					libro.setStock(Integer.parseInt(cajaStock.getText()));
@@ -69,7 +70,9 @@ public class ConsultasLibros extends VentanaLibros {
 					e1.printStackTrace();
 				}
 				
-			} 
+			} else {
+				JOptionPane.showMessageDialog(null, "faltan datos");
+			}
 
 		} else {
 			validacion(e);

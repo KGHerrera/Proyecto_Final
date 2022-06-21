@@ -185,7 +185,6 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 		jp = new JScrollPane(tablaEmpleados);
 		jp.setBounds(this.getWidth() / 12, 320, 630, 270);
 
-
 		/*
 		 * Border line = BorderFactory.createLineBorder(nPane.getBackground(), 2);
 		 * jp.setBorder(line);
@@ -229,11 +228,18 @@ public class VentanaEmpleados extends JInternalFrame implements ActionListener, 
 	}
 
 	public void cargarDatosEmpleados(java.awt.event.MouseEvent evt, JTable tablaEmpleados) {
-		cajaIdEmpleado.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 0)));
-		cajaNombre.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 1));
-		cajaApellido.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 2));
-		cajaSalario.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 3)));
-		cajaCargo.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 4));
+		
+		try {
+			cajaIdEmpleado.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 0)));
+			cajaNombre.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 1));
+			cajaApellido.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 2));
+			cajaSalario.setText(String.valueOf(tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 3)));
+			cajaCargo.setText((String) tablaEmpleados.getValueAt(tablaEmpleados.getSelectedRow(), 4));
+		} catch(Exception e) {
+			
+		}
+		
+		
 	}
 
 	public void activarCajas() {

@@ -30,8 +30,8 @@ public class BajasLibros extends VentanaLibros {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnEnviar) {
-			if (!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("") || !cajaAutor.getText().equals("")
-					|| !cajaPrecio.getText().equals("") || !cajaStock.getText().equals("")) {
+			if ((!cajaIdLibro.getText().equals("") || !cajaNombre.getText().equals("") || !cajaAutor.getText().equals("")
+					|| !cajaPrecio.getText().equals("") || !cajaStock.getText().equals("")) && !cajaPrecio.getText().equals(".")) {
 
 				limpiarObjeto(libro);
 

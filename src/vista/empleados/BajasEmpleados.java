@@ -27,15 +27,17 @@ public class BajasEmpleados extends VentanaEmpleados {
 
 		BajasEmpleados.tablaEmpleados = new JTable();
 		configurarTabla(BajasEmpleados.tablaEmpleados, "n");
+		
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnEnviar) {
-			if (!cajaIdEmpleado.getText().equals("") || !cajaNombre.getText().equals("")
+			if ((!cajaIdEmpleado.getText().equals("") || !cajaNombre.getText().equals("")
 					|| !cajaApellido.getText().equals("") || !cajaCargo.getText().equals("")
-					|| !cajaSalario.getText().equals("")) {
+					|| !cajaSalario.getText().equals("")) && !cajaSalario.getText().equals(".")) {
 
 				limpiarObjeto(empleado);
 

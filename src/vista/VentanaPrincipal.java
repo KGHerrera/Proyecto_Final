@@ -132,6 +132,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 
 		desktopPane = new JDesktopPane();
+		
 		internalFrameAltasEmpleados = new AltasEmpleados();
 		desktopPane.add(internalFrameAltasEmpleados);
 
@@ -169,7 +170,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		desktopPane.add(internalFrameConsultasVentas);
 
 		esconderVentanas();
-
+		
 		add(desktopPane, BorderLayout.CENTER);
 
 		setLocationRelativeTo(null);

@@ -34,6 +34,8 @@ public class AltasEmpleados extends VentanaEmpleados {
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "s");
+		
+		
 
 	}
 

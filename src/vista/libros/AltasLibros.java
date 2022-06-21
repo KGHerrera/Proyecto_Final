@@ -41,7 +41,7 @@ public class AltasLibros extends VentanaLibros {
 
 		if (e.getSource() == btnEnviar) {
 			if (!cajaNombre.getText().equals("") && !cajaAutor.getText().equals("") && !cajaPrecio.getText().equals("")
-					&& !cajaStock.getText().equals("")) {
+					&& !cajaStock.getText().equals("") && !cajaPrecio.getText().equals(".")) {
 
 				limpiarObjeto(libro);
 

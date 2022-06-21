@@ -203,11 +203,17 @@ public class VentanaLibros extends JInternalFrame implements ActionListener, Key
 	}
 
 	public void cargarDatosLibros(java.awt.event.MouseEvent evt, JTable tablaLibros) {
-		cajaIdLibro.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 0)));
-		cajaNombre.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 1));
-		cajaAutor.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 2));
-		cajaStock.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 3)));
-		cajaPrecio.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 4)));
+		
+		try {
+			cajaIdLibro.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 0)));
+			cajaNombre.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 1));
+			cajaAutor.setText((String) tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 2));
+			cajaStock.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 3)));
+			cajaPrecio.setText(String.valueOf(tablaLibros.getValueAt(tablaLibros.getSelectedRow(), 4)));
+		} catch (Exception e) {
+			
+		}
+		
 	}
 
 	public void activarCajas() {

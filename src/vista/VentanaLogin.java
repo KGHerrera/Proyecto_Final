@@ -112,8 +112,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 						JFrame.setDefaultLookAndFeelDecorated(true);
 						JDialog.setDefaultLookAndFeelDecorated(true);
-						// javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 						javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+						UIManager.put("control", new Color(240, 240, 240));
+						
+						
+
 
 					} catch (Exception ex) {
 

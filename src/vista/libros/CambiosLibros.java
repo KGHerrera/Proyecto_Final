@@ -44,7 +44,7 @@ public class CambiosLibros extends VentanaLibros {
 
 		if (e.getSource() == btnEnviar) {
 			if (!cajaIdLibro.getText().equals("") && !cajaNombre.getText().equals("") && !cajaAutor.getText().equals("")
-					&& !cajaPrecio.getText().equals("") && !cajaStock.getText().equals("")) {
+					&& !cajaPrecio.getText().equals("") && !cajaStock.getText().equals("") && !cajaPrecio.getText().equals(".")) {
 				limpiarObjeto(libro);
 
 				libro.setIdLibro(Integer.parseInt(cajaIdLibro.getText()));

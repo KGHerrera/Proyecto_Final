@@ -31,9 +31,9 @@ public class ConsultasEmpleados extends VentanaEmpleados implements ActionListen
 
 		if (e.getSource() == btnEnviar) {
 
-			if (!cajaIdEmpleado.getText().equals("") || !cajaNombre.getText().equals("")
+			if ((!cajaIdEmpleado.getText().equals("") || !cajaNombre.getText().equals("")
 					|| !cajaApellido.getText().equals("") || !cajaCargo.getText().equals("")
-					|| !cajaSalario.getText().equals("")) {
+					|| !cajaSalario.getText().equals("")) && !cajaSalario.getText().equals(".")) {
 
 				limpiarObjeto(empleado);
 

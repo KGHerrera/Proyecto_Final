@@ -38,6 +38,8 @@ public class CambiosEmpleados extends VentanaEmpleados {
 
 		tablaEmpleados = new JTable();
 		configurarTabla(tablaEmpleados, "n");
+		
+		
 
 	}
 
@@ -47,7 +49,7 @@ public class CambiosEmpleados extends VentanaEmpleados {
 		if (e.getSource() == btnEnviar) {
 			if (!cajaIdEmpleado.getText().equals("") && !cajaNombre.getText().equals("")
 					&& !cajaApellido.getText().equals("") && !cajaCargo.getText().equals("")
-					&& !cajaSalario.getText().equals("")) {
+					&& !cajaSalario.getText().equals("") && !cajaSalario.getText().equals(".")) {
 				limpiarObjeto(empleado);
 
 				empleado.setIdEmpleado(Integer.parseInt(cajaIdEmpleado.getText()));
